@@ -32,7 +32,11 @@ class Component<T = string> extends React.Component<Props<T> & RouteComponentPro
   }
   
   componentWillMount() {
-    const x = {myname: 'Lee'};
+    const x: {
+      myname: string
+    } = {
+      myname: 'Lee',
+    };
     this.setState(x);
   }
 }
