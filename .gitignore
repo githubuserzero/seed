@@ -1,0 +1,11 @@
+/node_modules/
+/typings/
+
+/*.iml
+/.idea/
+
+/.yarnclean
+/*.log
+
+/dll
+/dist-debug

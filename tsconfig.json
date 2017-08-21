@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "downlevelIteration": true,
+    "lib": [
+      "dom",
+      "es2015",
+      "es2016"
+    ],
+    "baseUrl": "src",
+    "paths": {
+      "actions": [
+        "shared/actions"
+      ],
+      "components": [
+        "shared/components"
+      ],
+      "data": [
+        "shared/data"
+      ],
+      "frame": [
+        "shared/frame"
+      ],
+      "services": [
+        "shared/services"
+      ],
+      "stores": [
+        "shared/stores"
+      ],
+      "styles": [
+        "shared/styles"
+      ],
+      "utils": [
+        "shared/utils"
+      ]
+    }
+  }
+}

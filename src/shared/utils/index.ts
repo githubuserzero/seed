@@ -1,0 +1,1 @@
+export { TypedMap } from './immutable';
