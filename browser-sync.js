@@ -4,7 +4,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const {directory, port} = require('./config');
-const config = require('./webpack.config');
+const config = require('./webpack');
 
 config({action: 'serve', port}).then(config => {
   const bundler = webpack(config);

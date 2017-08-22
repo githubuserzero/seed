@@ -19,7 +19,7 @@ const directory = {
   debug: 'dist-debug',
   production: 'dist',
   dll: 'dll',
-  static: ['static', 'node_modules/@nebula/nebula-ui/src'],
+  static: ['static'],
 };
 
 const port = process.env.PORT || 3100;

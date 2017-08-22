@@ -2,6 +2,8 @@ import * as i18n from 'i18next';
 import * as LanguageDetector from 'i18next-browser-languagedetector';
 import * as XHR from 'i18next-xhr-backend';
 
+export const languages: string[] = ['en', 'ko'];
+
 export default i18n
   .use(XHR)
   .use(LanguageDetector)

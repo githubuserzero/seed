@@ -1,5 +1,5 @@
 {
-  "name": "mobx-seed",
+  "name": "seed",
   "version": "0.1.0",
   "description": "{project-description}",
   "scripts": {
@@ -13,20 +13,22 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "ghpages": "git subtree push --prefix dist origin gh-pages",
-    "lint": "tslint 'src/**/!(*.spec|*.test).ts?(x)'"
+    "lint": "tslint 'src/**/!(*.spec|*.test).ts?(x)'",
+    "build:lib": "rimraf libs/$npm_config_LIBRARY && tsc --project tsconfig.lib.$npm_config_LIBRARY.json && rimraf declaration-rest && webpack --config webpack.lib.$npm_config_LIBRARY.js --env.minify=false && webpack --config webpack.lib.$npm_config_LIBRARY.js --env.minify=true && cp src/shared/$npm_config_LIBRARY/package.json libs/$npm_config_LIBRARY/package.json",
+    "build:lib:some-library": "npm run build:lib --LIBRARY=some-library"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iamssen/mobx-seed.git"
+    "url": "git+https://github.com/iamssen/seed.git"
   },
   "upstream": {
-    "git": "https://github.com/iamssen/mobx-seed.git"
+    "git": "https://github.com/iamssen/seed.git"
   },
   "bugs": {
-    "url": "https://github.com/iamssen/mobx-seed/issues"
+    "url": "https://github.com/iamssen/seed/issues"
   },
-  "homepage": "https://github.com/iamssen/mobx-seed",
+  "homepage": "https://github.com/iamssen/seed",
   "dependencies": {
     "core-js": "^2.4.1",
     "i18next": "^8.4.3",

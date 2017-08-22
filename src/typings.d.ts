@@ -14,6 +14,6 @@ declare module '*.css' {
 }
 
 declare module '*.json' {
-  const content: {};
+  const content: object;
   export = content;
 }
