@@ -6,5 +6,3 @@ import 'core-js/es7/array';
 import 'core-js/library/fn/object/assign';
 
 import 'url-search-params-polyfill';
-
-// import 'whatwg-fetch';

@@ -39,6 +39,9 @@
       ],
       "utils": [
         "shared/utils"
+      ],
+      "open-react-modal": [
+        "shared/open-react-modal"
       ]
     }
   }

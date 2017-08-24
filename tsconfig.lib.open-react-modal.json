@@ -11,9 +11,9 @@
     ],
     "outDir": "declaration-rest",
     "declaration": true,
-    "declarationDir": "libs/some-library"
+    "declarationDir": "libs/open-react-modal"
   },
   "files": [
-    "src/shared/some-library/index.ts"
+    "src/shared/open-react-modal/index.ts"
   ]
 }

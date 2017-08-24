@@ -10,7 +10,7 @@ interface State {
 export default class extends React.Component<Props, State> {
   render() {
     return (
-      <div>...</div>
+      <div>Sample...</div>
     );
   }
 }

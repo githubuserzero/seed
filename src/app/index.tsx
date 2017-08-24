@@ -7,32 +7,24 @@ import { HashRouter } from 'react-router-dom';
 import { UserInfoStore } from 'stores';
 import styled from 'styled-components';
 import LanguageChangeButton from './components/LanguageChangeButton';
+import RouterContents from './components/RouterContents';
+import RouterNavigation from './components/RouterNavigation';
 import SignButton from './components/SignButton';
-import Test, { As as TestAs } from './components/Test';
 import * as styles from './index.scss';
-
-const StringTest: TestAs<string> = Test;
-const NumberTest: TestAs<number> = Test;
-const BooleanTest: TestAs<boolean> = Test;
-
-console.log('index.tsx..()', styles.cls);
+import { closeModals } from 'open-react-modal';
 
 const App: React.ComponentClass<{}> = styled(class extends React.Component<{className: string}, {}> {
   render() {
     return (
       <Provider userInfo={new UserInfoStore}>
         <HashRouter>
-          <div className={this.props.className}>
+          <div className={styles.cls + ' ' + this.props.className}>
             <div>
               <LanguageChangeButton/>
               <SignButton/>
             </div>
-            <div className={styles.cls}>
-              <Test value="abc"/>
-              <StringTest value="abc"/>
-              <NumberTest value={123}/>
-              <BooleanTest value={false}/>
-            </div>
+            <RouterNavigation/>
+            <RouterContents/>
           </div>
         </HashRouter>
       </Provider>
@@ -65,7 +57,7 @@ if (module.hot) {
     }
     
     // remove modals
-    //closeModals();
+    closeModals();
     
     // alive body scroll
     //document.body.style.overflow = '';

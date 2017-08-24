@@ -55,7 +55,8 @@ describe('Immutable.js', () => {
     }
     
     it('should working fine Record.getIn(), setIn(), updateIn()', () => {
-      const x = Record<Type>(getDefaultValue())();
+      type TypeRecored = Record.Instance<Type> & Readonly<Type>;
+      const x: TypeRecored = Record<Type>(getDefaultValue())();
       expect(x.getIn(['list', 0, 'a'])).toEqual('a1');
       expect(x.getIn(['list', 0, 'b'])).toEqual('b1');
       expect(x.getIn(['list', 1, 'a'])).toEqual('a2');
@@ -65,10 +66,10 @@ describe('Immutable.js', () => {
       expect(x.getIn(['list', 3, 'a'])).toEqual('a4');
       expect(x.getIn(['list', 3, 'b'])).toEqual('b4');
       
-      const y = x.updateIn(['list', 2, 'a'], () => 'xxx');
+      const y: TypeRecored = x.updateIn(['list', 2, 'a'], () => 'xxx');
       expect(y.getIn(['list', 2, 'a'])).toEqual('xxx');
       
-      const z = y.setIn(['list', 2, 'c'], 'yyy');
+      const z: TypeRecored = y.setIn(['list', 2, 'c'], 'yyy');
       expect(z.getIn(['list', 2]).size).toEqual(3);
       expect(z.getIn(['list', 2, 'c'])).toEqual('yyy');
     });
@@ -76,7 +77,7 @@ describe('Immutable.js', () => {
   
   describe('for..of', () => {
     it('should working fine for..of of Map', () => {
-      const m = Map<string>({a: 'a', b: 'b', c: 'c'});
+      const m: Map<string, string> = Map<string>({a: 'a', b: 'b', c: 'c'});
       expect(m.size).toEqual(3);
       
       const keys: string[] = [], values: string[] = [];
@@ -96,7 +97,9 @@ describe('Immutable.js', () => {
         c: string;
       }
       
-      const r = Record<ABC>({a: 'a', b: 'b', c: 'c'})();
+      type ABCRecord = Record.Instance<ABC> & Readonly<ABC>;
+      
+      const r: ABCRecord = Record<ABC>({a: 'a', b: 'b', c: 'c'})();
       
       const keys: string[] = [], values: string[] = [];
       for (const [k, v] of r) {

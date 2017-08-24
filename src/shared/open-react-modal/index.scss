@@ -1,0 +1,13 @@
+.open-react-modal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  
+  overflow-x: hidden;
+  overflow-y: auto;
+  
+  z-index: 1090;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
