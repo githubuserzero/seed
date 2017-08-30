@@ -3,9 +3,9 @@
   "version": "2017.1.0",
   "description": "{project-description}",
   "scripts": {
-    "build:prod": "npm rebuild && webpack --config webpack.js --env.action=build.production",
-    "build:dev": "webpack --config webpack.js --env.action=build.dev",
-    "build:dll": "webpack --config webpack.js --env.action=build.dll",
+    "build:prod": "npm rebuild && webpack --env.action=build.production",
+    "build:dev": "webpack --env.action=build.dev",
+    "build:dll": "webpack --env.action=build.dll",
     "postinstall": "npm rebuild && npm run build:dll",
     "serve": "npm rebuild && node browser-sync.js",
     "build": "npm run build:prod",
