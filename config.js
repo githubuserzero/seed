@@ -1,3 +1,13 @@
+/**
+ @typedef {Object.<string, Array.<string> | string>} Entry
+ @typedef {Object.<string, Array.<string>>} DLL
+ @typedef {Object.<string, string>} Externals
+ @typedef {Object.<string, Array.<string> | string>} Directory
+ @typedef {{group?: string, externals?: Object.<string, string>}} Lib
+ @typedef {Object.<string, Lib>} Libs
+ */
+
+/** @type Entry */
 const entry = {
   'init': [
     './src/polyfills',
@@ -6,13 +16,15 @@ const entry = {
   'component-showcase': './src/component-showcase',
 };
 
-const dlls = {
+/** @type DLL */
+const dll = {
   dll: [
     './src/vendor',
     './src/polyfills',
   ],
 };
 
+/** @type Externals */
 const externals = {};
 
 const directory = {
@@ -22,12 +34,23 @@ const directory = {
   static: ['static'],
 };
 
+/** @type Libs */
+const libs = {
+  'open-react-modal': {
+    externals: {
+      'react': 'react',
+      'react-dom': 'react-dom',
+    },
+  },
+};
+
 const port = process.env.PORT || 3100;
 
 module.exports = {
   entry,
-  dlls,
+  dll,
   directory,
   port,
   externals,
+  libs,
 };

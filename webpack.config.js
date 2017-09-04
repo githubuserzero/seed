@@ -7,7 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const rimraf = require('rimraf');
 
-const {entry, dlls, directory, externals} = require('./config');
+const {entry, dll, directory, externals} = require('./config');
 const src = path.join(__dirname, 'src');
 
 const extractCSS = new ExtractTextPlugin({filename: '[name].css', allChunks: true});
@@ -113,7 +113,7 @@ const devConfig = () => merge(baseConfig(), {
       chunks: Object.keys(entry),
     }),
     extractCSS,
-    ...Object.keys(dlls).map(name => {
+    ...Object.keys(dll).map(name => {
       return new webpack.DllReferencePlugin({
         context: '.',
         manifest: require(`./${directory.dll}/${name}-manifest.json`),
@@ -141,7 +141,7 @@ const buildDLL = () => merge(baseConfig(), {
     library: '[name]_lib',
   },
   
-  entry: dlls,
+  entry: dll,
   
   plugins: [
     new webpack.DllPlugin({

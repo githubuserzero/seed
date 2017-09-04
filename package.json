@@ -14,8 +14,7 @@
     "coverage": "jest --coverage",
     "ghpages": "git subtree push --prefix dist origin gh-pages",
     "lint": "tslint 'src/**/!(*.spec|*.test).ts?(x)'",
-    "build:lib": "rimraf libs/$npm_config_lib && tsc --project tsconfig.lib.$npm_config_lib.json && rimraf declaration-rest && webpack --config webpack.lib.$npm_config_lib.js && copy \"src/shared/$npm_config_lib/!(*.ts|*.tsx|*.js|*.scss|*.css)\" libs/$npm_config_lib/",
-    "build:lib:open-react-modal": "npm run build:lib --lib=open-react-modal"
+    "build:libs": "sh build-libs.sh"
   },
   "license": "MIT",
   "repository": {
@@ -64,7 +63,6 @@
     "autoprefixer": "^7.1.2",
     "awesome-typescript-loader": "^3.2.3",
     "browser-sync": "^2.18.13",
-    "copy": "^0.3.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.5",
     "cssnano": "^3.10.0",

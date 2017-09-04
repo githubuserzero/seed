@@ -9,3 +9,6 @@
 
 /dll
 /dist-debug
+
+/tsconfig.lib.*.json
+/webpack.lib.*.js
