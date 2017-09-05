@@ -82,7 +82,7 @@ module.exports = () => new Promise(resolve => {
     },
     
     resolve: {
-      extensions: ['.ts', '.tsx'],
+      extensions: ['.ts', '.js', '.scss', '.css', '.tsx'],
     },
     
     module: {
