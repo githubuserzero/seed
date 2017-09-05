@@ -1,8 +1,16 @@
 const {libs} = require('./config');
 const fs = require('fs');
+const path = require('path');
 const glob = require('glob');
 
-const createTSConfig = ({name, groupDir, indexFile}) => {
+const createTSConfig = ({name, groupDir, indexFile, alias}) => {
+  const paths = alias
+    ? Object.keys(alias).reduce((paths, name) => {
+      paths[name] = [path.resolve(__dirname, alias[name])];
+      return paths;
+    }, {})
+    : {};
+  
   return `
 {
   "compilerOptions": {
@@ -18,7 +26,9 @@ const createTSConfig = ({name, groupDir, indexFile}) => {
     ],
     "outDir": "declaration-rest",
     "declaration": true,
-    "declarationDir": "libs/${name}"
+    "declarationDir": "libs/${name}",
+    "baseUrl": "src",
+    "paths": ${JSON.stringify(paths)}
   },
   "files": [
     "src/shared/${groupDir}${name}/${indexFile}"
@@ -27,7 +37,7 @@ const createTSConfig = ({name, groupDir, indexFile}) => {
   `;
 };
 
-const createWebpackConfig = ({name, groupDir, indexFile, externals}) => {
+const createWebpackConfig = ({name, groupDir, indexFile, externals, alias}) => {
   const externalsMap = externals ? Object.keys(externals).reduce((map, name) => {
     map[name] = {
       commonjs2: name,
@@ -58,6 +68,7 @@ const createWebpackConfig = ({name, groupDir, indexFile, externals}) => {
   
   return `
 const webpack = require('webpack');
+const fs = require('fs');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -137,13 +148,13 @@ module.exports = () => new Promise(resolve => {
 };
 
 console.log(Object.keys(libs).reduce((commands, name) => {
-  const {group, externals, statics} = libs[name];
+  const {group, externals, statics, alias} = libs[name];
   const groupDir = group ? group + '/' : '';
   const indexFile = fs.existsSync('src/shared/' + groupDir + name + '/index.tsx')
     ? 'index.tsx'
     : 'index.ts';
   
-  const param = {name, group, indexFile, groupDir, externals, statics};
+  const param = {name, group, indexFile, groupDir, externals, statics, alias};
   const tsConfig = 'tsconfig.lib.' + name + '.json';
   const webpackConfig = 'webpack.lib.' + name + '.js';
   

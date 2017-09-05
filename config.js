@@ -3,7 +3,7 @@
  @typedef {Object.<string, Array.<string>>} DLL
  @typedef {Object.<string, string>} Externals
  @typedef {Object.<string, Array.<string> | string>} Directory
- @typedef {{group?: string, externals?: Object.<string, string>}} Lib
+ @typedef {{group?: string, alias?: Object.<string, string>, externals?: Object.<string, string>}} Lib
  @typedef {Object.<string, Lib>} Libs
  */
 
