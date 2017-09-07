@@ -14,7 +14,6 @@ module.exports = {
                alias[path.basename(dir)] = path.resolve(__dirname, dir);
                return alias;
              }, {}),
-    
   },
   
   externals,
