@@ -100,7 +100,7 @@ module.exports = () => new Promise(resolve => {
           use: extractCSS.extract({
             fallback: 'style-loader',
             use: [
-              'css-loader?sourceMap=true&url=false&importLoaders=1',
+              'css-loader?sourceMap=true&url=false&modules=true&localIdentName="[name]__[local]___[hash:base64:5]"&importLoaders=1',
               'postcss-loader',
             ],
           }),
@@ -111,7 +111,7 @@ module.exports = () => new Promise(resolve => {
           use: extractCSS.extract({
             fallback: 'style-loader',
             use: [
-              'css-loader?sourceMap=true&url=false&importLoaders=2',
+              'css-loader?sourceMap=true&url=false&modules=true&localIdentName="[name]__[local]___[hash:base64:5]"&importLoaders=2',
               'postcss-loader',
               'sass-loader',
             ],
