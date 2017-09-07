@@ -3,7 +3,7 @@
  @typedef {Object.<string, Array.<string>>} DLL
  @typedef {Object.<string, string>} Externals
  @typedef {Object.<string, Array.<string> | string>} Directory
- @typedef {{group?: string, alias?: Object.<string, string>, externals?: Object.<string, string>}} Lib
+ @typedef {{group?: string}} Lib
  @typedef {Object.<string, Lib>} Libs
  */
 
@@ -36,12 +36,7 @@ const directory = {
 
 /** @type Libs */
 const libs = {
-  'open-react-modal': {
-    externals: {
-      'react': 'react',
-      'react-dom': 'react-dom',
-    },
-  },
+  'open-react-modal': {},
 };
 
 const port = process.env.PORT || 3100;

@@ -1,16 +1,8 @@
 const {libs} = require('./config');
 const fs = require('fs');
-const path = require('path');
 const glob = require('glob');
 
-const createTSConfig = ({name, groupDir, indexFile, alias}) => {
-  const paths = alias
-    ? Object.keys(alias).reduce((paths, name) => {
-      paths[name] = [path.resolve(__dirname, alias[name])];
-      return paths;
-    }, {})
-    : {};
-  
+const createTSConfig = ({name, groupDir, indexFile}) => {
   return `
 {
   "compilerOptions": {
@@ -19,6 +11,12 @@ const createTSConfig = ({name, groupDir, indexFile, alias}) => {
     "jsx": "react",
     "skipLibCheck": true,
     "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "downlevelIteration": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "libs"
+    ],
     "lib": [
       "dom",
       "es2015",
@@ -26,9 +24,8 @@ const createTSConfig = ({name, groupDir, indexFile, alias}) => {
     ],
     "outDir": "declaration-rest",
     "declaration": true,
-    "declarationDir": "libs/${name}",
-    "baseUrl": "src",
-    "paths": ${JSON.stringify(paths)}
+    "declarationDir": "libs/${groupDir}${name}",
+    "baseUrl": "src"
   },
   "files": [
     "src/shared/${groupDir}${name}/${indexFile}"
@@ -37,20 +34,11 @@ const createTSConfig = ({name, groupDir, indexFile, alias}) => {
   `;
 };
 
-const createWebpackConfig = ({name, groupDir, indexFile, externals, alias}) => {
-  const externalsMap = externals ? Object.keys(externals).reduce((map, name) => {
-    map[name] = {
-      commonjs2: name,
-      commonjs: name,
-      amd: name,
-    };
-    return map;
-  }, {}) : '';
-  
+const createWebpackConfig = ({name, groupDir, indexFile, libExternals}) => {
   const copyPlugin = (() => {
     const from = 'src/shared/' + groupDir + name;
-    const to = 'libs/' + name;
-    const list = glob.sync(from + '/**/!(*.ts|*.tsx|*.scss)')
+    const to = 'libs/' + groupDir + name;
+    const list = glob.sync(from + '/**/!(*.ts|*.tsx)')
                      .filter(file => {
                        return fs.existsSync(file) && !fs.statSync(file).isDirectory();
                      })
@@ -72,28 +60,29 @@ const fs = require('fs');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 const include = file => {
   return file.indexOf(path.resolve(__dirname, 'src/shared/${groupDir}${name}')) === 0;
 };
 
 module.exports = () => new Promise(resolve => {
-  const extractCSS = new ExtractTextPlugin({filename: 'libs/${name}/index.css', allChunks: true});
+  const extractCSS = new ExtractTextPlugin({filename: 'libs/${groupDir}${name}/index.css', allChunks: true});
   
   const config = {
     devtool: 'source-map',
     
     entry: () => './src/shared/${groupDir}${name}/${indexFile}',
     
-    ${externals ? 'externals: ' + JSON.stringify(externalsMap) + ',' : ''}
+    externals: [nodeExternals()].concat(${JSON.stringify(libExternals)}),
     
     output: {
-      filename: 'libs/${name}/index.js',
+      filename: 'libs/${groupDir}${name}/index.js',
       libraryTarget: 'commonjs',
     },
     
     resolve: {
-      extensions: ['.ts', '.js', '.scss', '.css', '.tsx'],
+      extensions: ['.ts', '.js', '.tsx'],
     },
     
     module: {
@@ -147,26 +136,38 @@ module.exports = () => new Promise(resolve => {
   `;
 };
 
-console.log(Object.keys(libs).reduce((commands, name) => {
-  const {group, externals, statics, alias} = libs[name];
+console.log(Object.keys(libs).reduce(($, name) => {
+  const {commands, libExternals} = $;
+  const {group} = libs[name];
   const groupDir = group ? group + '/' : '';
   const indexFile = fs.existsSync('src/shared/' + groupDir + name + '/index.tsx')
     ? 'index.tsx'
     : 'index.ts';
   
-  const param = {name, group, indexFile, groupDir, externals, statics, alias};
+  const param = {name, group, indexFile, groupDir, libExternals};
   const tsConfig = 'tsconfig.lib.' + name + '.json';
   const webpackConfig = 'webpack.lib.' + name + '.js';
   
   fs.writeFileSync(__dirname + '/' + tsConfig, createTSConfig(param));
   fs.writeFileSync(__dirname + '/' + webpackConfig, createWebpackConfig(param));
   
-  commands.push('rimraf libs/' + name);
+  commands.push('echo ');
+  commands.push('echo Remove directory: ' + name);
+  commands.push('echo ==============================================================');
+  commands.push('rimraf libs/' + groupDir + name);
+  commands.push('echo ');
+  commands.push('echo Create TypeScript definition files: ' + name);
+  commands.push('echo ==============================================================');
   commands.push('tsc --project ' + tsConfig);
   commands.push('rimraf declaration-rest');
+  commands.push('echo ');
+  commands.push('echo Build Webpack: ' + name);
+  commands.push('echo ==============================================================');
   commands.push('webpack --config ' + webpackConfig);
   commands.push('rimraf ' + tsConfig);
   commands.push('rimraf ' + webpackConfig);
   
-  return commands;
-}, []).join(';\n'));
+  libExternals.push(groupDir + name);
+  
+  return $;
+}, {commands: [], libExternals: []}).commands.join(';\n'));
