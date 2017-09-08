@@ -1,5 +1,6 @@
 import { i18n } from 'frame';
 import { Provider } from 'mobx-react';
+import { closeModals } from 'open-react-modal';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { I18nextProvider } from 'react-i18next';
@@ -11,7 +12,6 @@ import RouterContents from './components/RouterContents';
 import RouterNavigation from './components/RouterNavigation';
 import SignButton from './components/SignButton';
 import * as styles from './index.scss';
-import { closeModals } from 'open-react-modal';
 
 const App: React.ComponentClass<{}> = styled(class extends React.Component<{className: string}, {}> {
   render() {

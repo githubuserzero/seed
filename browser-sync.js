@@ -26,6 +26,11 @@ config({action: 'serve', port}).then(config => {
         }),
         
         webpackHotMiddleware(bundler),
+  
+        //(req, res, next) => {
+        //  res.setHeader('Cache-control', 'no-cache');
+        //  next();
+        //},
       ],
     },
     
