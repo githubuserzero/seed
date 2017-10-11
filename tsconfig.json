@@ -7,7 +7,7 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "experimentalDecorators": true,
-    "allowJs": true,
+    "allowJs": false,
     "downlevelIteration": true,
     "lib": [
       "dom",

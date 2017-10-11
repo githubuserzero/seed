@@ -1,5 +1,5 @@
-import { changeLanguage } from 'i18next';
+import { GlobalInjectedProps, Language } from 'frame';
 
-export default (lng: string) => {
-  changeLanguage(lng);
+export default (language: Language) => ({intl}: GlobalInjectedProps) => {
+  intl.updateLanguage(language);
 }

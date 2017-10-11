@@ -1,37 +1,10 @@
-import { i18n } from 'frame';
-import { Provider } from 'mobx-react';
+import { closeModals } from 'open-react-modal';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { I18nextProvider } from 'react-i18next';
-import { HashRouter } from 'react-router-dom';
-import { UserInfoStore } from 'stores';
-import styled from 'styled-components';
-import RouterContents from './components/RouterContents';
-import RouterNavigation from './components/RouterNavigation';
-import * as styles from './index.scss';
-import { closeModals } from 'open-react-modal';
+import { App } from './components';
 
-const App: React.ComponentClass<{}> = styled(class extends React.Component<{className: string}, {}> {
-  render() {
-    return (
-      <Provider userInfo={new UserInfoStore}>
-        <HashRouter>
-          <div className={styles.cls + ' ' + this.props.className}>
-            <RouterNavigation/>
-            <RouterContents/>
-          </div>
-        </HashRouter>
-      </Provider>
-    );
-  }
-})`// styled
-`;
-
-// DOM Render
 ReactDOM.render((
-  <I18nextProvider i18n={i18n}>
-    <App/>
-  </I18nextProvider>
+  <App/>
 ), document.querySelector('#app'));
 
 if (module.hot) {

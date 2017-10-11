@@ -1,16 +1,22 @@
 import * as React from 'react';
 
-interface Props {
+export interface Props {
+
+}
+
+interface InternalProps {
 
 }
 
 interface State {
 }
 
-export default class extends React.Component<Props, State> {
+class Component extends React.Component<Props & InternalProps, State> {
   render() {
     return (
       <div>Main</div>
     );
   }
 }
+
+export default Component as React.ComponentClass<Props>;

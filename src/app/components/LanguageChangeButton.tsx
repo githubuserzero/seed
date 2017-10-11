@@ -1,31 +1,33 @@
 import { changeLanguage } from 'actions';
-import { i18n, languages } from 'frame';
+import { Language, languages } from 'frame';
 import { Dispatch, dispatcher } from 'mobx-dispatcher';
+import { inject, observer } from 'mobx-react';
 import * as React from 'react';
+import { IntlStore } from 'stores';
 import styled from 'styled-components';
 
-interface Props {
+export interface Props {
+}
+
+interface InternalProps {
   className: string;
+  intl: IntlStore;
   dispatch: Dispatch;
 }
 
 interface State {
-  language?: string;
 }
 
-const Component: React.ComponentClass<{}> = styled(dispatcher(class extends React.Component<Props, State> {
-  state: State = {
-    language: i18n.language,
-  };
-  
+@inject('intl') @dispatcher @observer
+class Component extends React.Component<Props & InternalProps, State> {
   render() {
     return (
       <div className={this.props.className}>
-        {this.state.language} :
+        {this.props.intl.language} :
         {
-          languages.map(lng => (
-            <button onClick={() => changeLanguage(lng)}>
-              {lng}
+          languages.map(language => (
+            <button onClick={() => this.change(language)}>
+              {language}
             </button>
           ))
         }
@@ -33,25 +35,11 @@ const Component: React.ComponentClass<{}> = styled(dispatcher(class extends Reac
     );
   }
   
-  componentWillMount() {
-    i18n.on('initialized', this.languageInitialized);
-    i18n.on('languageChanged', this.languageChanged);
-  }
-  
-  componentWillUnmount() {
-    i18n.off('languageChanged', this.languageChanged);
-  }
-  
-  languageInitialized = () => {
-    i18n.off('initialized', this.languageInitialized);
-    this.setState({language: i18n.language || 'en'});
+  change = (language: Language) => {
+    this.props.dispatch(changeLanguage(language));
   };
-  
-  languageChanged = (language: string) => {
-    this.setState({language});
-  };
-}))`// styled
-  display: inline-block;
-`;
+}
 
-export default Component;
+export default styled(Component)`
+  display: inline-block;
+` as React.ComponentClass<Props>;

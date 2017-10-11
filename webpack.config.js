@@ -38,6 +38,10 @@ const baseConfig = () => ({
              }, {}),
   },
   
+  resolveLoader: {
+    modules: ['node_modules', 'custom_loaders'],
+  },
+  
   externals,
   
   module: {
@@ -173,6 +177,8 @@ const buildProduction = () => merge(prodConfig(), {
       compress: {
         warnings: false,
         screw_ie8: true,
+        drop_debugger: true,
+        drop_console: true,
       },
     }),
   ],
