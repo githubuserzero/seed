@@ -1,4 +1,4 @@
-const {libs} = require('./config');
+const {libs} = require('./config.json');
 const fs = require('fs');
 const glob = require('glob');
 
@@ -15,7 +15,7 @@ const createTSConfig = ({name, groupDir, indexFile}) => {
     "downlevelIteration": true,
     "typeRoots": [
       "node_modules/@types",
-      "libs"
+      "dist/libs"
     ],
     "lib": [
       "dom",
@@ -24,7 +24,7 @@ const createTSConfig = ({name, groupDir, indexFile}) => {
     ],
     "outDir": "declaration-rest",
     "declaration": true,
-    "declarationDir": "libs/${groupDir}${name}",
+    "declarationDir": "dist/libs/${groupDir}${name}",
     "baseUrl": "src"
   },
   "files": [
@@ -37,7 +37,7 @@ const createTSConfig = ({name, groupDir, indexFile}) => {
 const createWebpackConfig = ({name, groupDir, indexFile, libExternals}) => {
   const copyPlugin = (() => {
     const from = 'src/shared/' + groupDir + name;
-    const to = 'libs/' + groupDir + name;
+    const to = 'dist/libs/' + groupDir + name;
     const list = glob.sync(from + '/**/!(*.ts|*.tsx)')
                      .filter(file => {
                        return fs.existsSync(file) && !fs.statSync(file).isDirectory();
@@ -67,7 +67,7 @@ const include = file => {
 };
 
 module.exports = () => new Promise(resolve => {
-  const extractCSS = new ExtractTextPlugin({filename: 'libs/${groupDir}${name}/index.css', allChunks: true});
+  const extractCSS = new ExtractTextPlugin({filename: 'dist/libs/${groupDir}${name}/index.css', allChunks: true});
   
   const config = {
     devtool: 'source-map',
@@ -77,7 +77,7 @@ module.exports = () => new Promise(resolve => {
     externals: [nodeExternals()].concat(${JSON.stringify(libExternals)}),
     
     output: {
-      filename: 'libs/${groupDir}${name}/index.js',
+      filename: 'dist/libs/${groupDir}${name}/index.js',
       libraryTarget: 'commonjs',
     },
     
@@ -136,9 +136,9 @@ module.exports = () => new Promise(resolve => {
   `;
 };
 
-console.log(Object.keys(libs).reduce(($, name) => {
+console.log(Object.keys(libs.entry).reduce(($, name) => {
   const {commands, libExternals} = $;
-  const {group} = libs[name];
+  const {group} = libs.entry[name];
   const groupDir = group ? group + '/' : '';
   const indexFile = fs.existsSync('src/shared/' + groupDir + name + '/index.tsx')
     ? 'index.tsx'
@@ -154,7 +154,7 @@ console.log(Object.keys(libs).reduce(($, name) => {
   commands.push('echo ');
   commands.push('echo Remove directory: ' + name);
   commands.push('echo ==============================================================');
-  commands.push('rimraf libs/' + groupDir + name);
+  commands.push('rimraf ' + 'dist/libs/' + groupDir + name);
   commands.push('echo ');
   commands.push('echo Create TypeScript definition files: ' + name);
   commands.push('echo ==============================================================');

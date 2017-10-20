@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const {externals} = require('./config');
+const {web} = require('./config.json');
 
 // NOTICE
 // This file is for Webstorm (IntelliJ) alias support.
@@ -16,5 +16,5 @@ module.exports = {
              }, {}),
   },
   
-  externals,
+  externals: web.externals,
 };

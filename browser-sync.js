@@ -2,21 +2,22 @@ const browserSync = require('browser-sync');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
+const proxyMiddleware = require('http-proxy-middleware');
 
-const {directory, port} = require('./config');
+const {web, ssr} = require('./config.json');
 const config = require('./webpack.config');
 
-config({action: 'serve', port}).then(config => {
+config({action: 'serve:web', port: web.port}).then(config => {
   const bundler = webpack(config);
   
   browserSync({
-    port,
+    port: web.port,
     open: false,
     
     server: {
       baseDir: [
-        directory.dll,
-        ...directory.static,
+        'dist-dev/dll',
+        ...web.static,
       ],
       
       middleware: [
@@ -26,7 +27,11 @@ config({action: 'serve', port}).then(config => {
         }),
         
         webpackHotMiddleware(bundler),
-  
+        
+        proxyMiddleware(['**', '!**/*.*'], {
+          target: 'http://localhost:' + ssr.port,
+        }),
+        
         //(req, res, next) => {
         //  res.setHeader('Cache-control', 'no-cache');
         //  next();
@@ -35,8 +40,8 @@ config({action: 'serve', port}).then(config => {
     },
     
     files: [
-      `./${directory.dll}`,
-      ...directory.static.map(dir => `./${dir}`),
+      './dist-dev/dll',
+      ...web.static.map(dir => `./${dir}`),
     ],
   });
 });

@@ -6,8 +6,9 @@ const {CheckerPlugin} = require('awesome-typescript-loader');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const rimraf = require('rimraf');
+const nodeExternals = require('webpack-node-externals');
 
-const {entry, dll, directory, externals} = require('./config');
+const {web, ssr} = require('./config.json');
 const src = path.join(__dirname, 'src');
 
 const extractCSS = new ExtractTextPlugin({filename: '[name].css', allChunks: true});
@@ -24,7 +25,7 @@ const baseConfig = () => ({
   
   plugins: [
     new CheckerPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(false),
   ],
   
   resolve: {
@@ -39,10 +40,10 @@ const baseConfig = () => ({
   },
   
   resolveLoader: {
-    modules: ['node_modules', 'custom_loaders'],
+    modules: ['node_modules'],
   },
   
-  externals,
+  externals: web.externals,
   
   module: {
     rules: [
@@ -109,61 +110,74 @@ const baseConfig = () => ({
   },
 });
 
-const devConfig = () => merge(baseConfig(), {
+const webDevelopmentConfig = () => merge(baseConfig(), {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: 'shared',
-      chunks: Object.keys(entry),
+      chunks: Object.keys(web.entry),
     }),
     extractCSS,
-    ...Object.keys(dll).map(name => {
+    ...Object.keys(web.dll).map(name => {
       return new webpack.DllReferencePlugin({
         context: '.',
-        manifest: require(`./${directory.dll}/${name}-manifest.json`),
+        manifest: require(`./dist-dev/dll/${name}-manifest.json`),
       });
     }),
   ],
 });
 
-const prodConfig = () => merge(baseConfig(), {
+const webProductionConfig = () => merge(baseConfig(), {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: 'shared',
-      chunks: Object.keys(entry),
+      chunks: Object.keys(web.entry),
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     extractCSS,
   ],
 });
 
-const buildDLL = () => merge(baseConfig(), {
+const ssrDevelopmentConfig = () => merge(baseConfig(), {
+  plugins: [
+    extractCSS,
+  ],
+});
+
+const ssrProductionConfig = () => merge(baseConfig(), {
+  plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
+    extractCSS,
+  ],
+});
+
+const webDLLBuild = () => merge(baseConfig(), {
   devtool: 'source-map',
   
   output: {
-    path: path.join(__dirname, directory.dll),
+    path: path.join(__dirname, 'dist-dev/dll'),
     library: '[name]_lib',
   },
   
-  entry: dll,
+  entry: web.dll,
   
   plugins: [
     new webpack.DllPlugin({
-      path: `./${directory.dll}/[name]-manifest.json`,
+      path: './dist-dev/dll/[name]-manifest.json',
       name: '[name]_lib',
     }),
   ],
 });
 
-const buildProduction = () => merge(prodConfig(), {
+const webProductionBuild = () => merge(webProductionConfig(), {
   output: {
-    path: path.join(__dirname, directory.production),
+    path: path.join(__dirname, 'dist/web'),
   },
   
-  entry,
+  entry: web.entry,
   
   plugins: [
     new CopyWebpackPlugin([
-      ...directory.static.map(dir => ({from: dir})),
+      ...web.static.map(dir => ({from: dir})),
     ]),
     new webpack.DefinePlugin({
       'process.env': {
@@ -184,66 +198,107 @@ const buildProduction = () => merge(prodConfig(), {
   ],
 });
 
-const buildDev = () => merge(devConfig(), {
+const webDevelopmentBuild = () => merge(webDevelopmentConfig(), {
   devtool: 'source-map',
   cache: true,
   
   output: {
-    path: path.join(__dirname, directory.debug),
+    path: path.join(__dirname, 'dist-dev/web'),
   },
   
-  entry,
+  entry: web.entry,
 });
 
-const serveConfig = (port) => {
-  return merge(devConfig(), {
-    // devtool: 'cheap-module-source-map', // slow + update source map with hmr
-    devtool: 'cheap-module-eval-source-map', // fast + no update source map with hmr
-    cache: true,
-    
-    output: {
-      path: path.join(__dirname),
-    },
-    
-    entry: Object.keys(entry).reduce((obj, name) => {
-      obj[name] = [
-        `webpack-hot-middleware/client?http://localhost:${port}`,
-        `webpack/hot/only-dev-server`,
-      ].concat(Array.isArray(entry[name]) ? entry[name] : [entry[name]]);
-      return obj;
-    }, {}),
-    
-    plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NamedModulesPlugin(),
-      new webpack.NoEmitOnErrorsPlugin(),
-    ],
-  });
-};
+const webServeConfig = (port) => merge(webDevelopmentConfig(), {
+  // devtool: 'cheap-module-source-map', // slow + update source map with hmr
+  devtool: 'cheap-module-eval-source-map', // fast + no update source map with hmr
+  cache: true,
+  
+  output: {
+    path: path.join(__dirname),
+  },
+  
+  entry: Object.keys(web.entry).reduce((obj, name) => {
+    obj[name] = [
+      `webpack-hot-middleware/client?http://localhost:${port}`,
+      `webpack/hot/only-dev-server`,
+    ].concat(Array.isArray(web.entry[name]) ? web.entry[name] : [web.entry[name]]);
+    return obj;
+  }, {}),
+  
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+  ],
+});
+
+const ssrProductionBuild = () => merge(ssrProductionConfig(), {
+  target: 'node',
+  devtool: 'source-map',
+  
+  entry: {
+    index: ssr.entry,
+  },
+  
+  output: {
+    path: path.join(__dirname, 'dist/ssr'),
+    libraryTarget: 'commonjs',
+  },
+  
+  externals: [nodeExternals()],
+});
+
+const ssrDevelopmentBuild = () => merge(ssrDevelopmentConfig(), {
+  target: 'node',
+  devtool: 'source-map',
+  
+  entry: {
+    index: ssr.entry,
+  },
+  
+  output: {
+    path: path.join(__dirname, 'dist-dev/ssr'),
+    libraryTarget: 'commonjs',
+  },
+  
+  externals: [nodeExternals()],
+});
 
 module.exports = ({action, port}) => new Promise((resolve, reject) => {
   switch (action) {
-    case 'build.production':
-      rimraf(directory.production, err => err ? reject(err) : resolve());
+    case 'build:web':
+      rimraf('dist/web', err => err ? reject(err) : resolve());
       break;
-    case 'build.dev':
-      rimraf(directory.debug, err => err ? reject(err) : resolve());
+    case 'build:web:dev':
+      rimraf('dist-dev/web', err => err ? reject(err) : resolve());
       break;
-    case 'build.dll':
-      rimraf(directory.dll, err => err ? reject(err) : resolve());
+    case 'build:web:dev:dll':
+      rimraf('dist-dev/dll', err => err ? reject(err) : resolve());
       break;
-    case 'serve':
+    case 'build:ssr':
+      rimraf('dist/ssr', err => err ? reject(err) : resolve());
+      break;
+    case 'build:ssr:dev':
+      rimraf('dist-dev/ssr', err => err ? reject(err) : resolve());
+      break;
+    case 'serve:web':
       resolve();
+      break;
   }
 }).then(() => {
   switch (action) {
-    case 'build.production':
-      return buildProduction();
-    case 'build.dev':
-      return buildDev();
-    case 'build.dll':
-      return buildDLL();
-    case 'serve':
-      return serveConfig(port);
+    case 'build:web':
+      return webProductionBuild();
+    case 'build:web:dev':
+      return webDevelopmentBuild();
+    case 'build:web:dev:dll':
+      return webDLLBuild();
+    case 'build:ssr':
+      return ssrProductionBuild();
+    case 'build:ssr:dev':
+      return ssrDevelopmentBuild();
+    case 'serve:web':
+      return webServeConfig(port);
   }
 });

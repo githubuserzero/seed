@@ -14,6 +14,14 @@ declare module '*.css' {
 }
 
 declare module '*.json' {
-  const content: object;
+  // tslint:disable
+  const content: any;
+  // tslint:enable
   export = content;
+}
+
+interface Window {
+  // tslint:disable
+  __INITIAL_STATE__: any;
+  // tslint:enable
 }
