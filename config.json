@@ -5,6 +5,7 @@
         "./src/client/polyfills"
       ],
       "app": "./src/client/app",
+      "html-app": "./src/client/html-app",
       "showcase": "./src/client/showcase"
     },
     "dll": {
