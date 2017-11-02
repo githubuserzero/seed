@@ -1,27 +1,55 @@
 import { Provider } from 'mobx-react';
-import { closeModals } from 'open-react-modal';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { InitialStateStore, IntlStore, UserInfoStore } from 'stores';
+import { InitialStateStore, IntlStore, intlStore, UserInfoStore } from 'stores';
 import Container from './Container';
 
+export interface Stores {
+  userInfo: UserInfoStore;
+  intl: IntlStore;
+  initialState: InitialStateStore;
+}
+
+class MobXProvider extends React.Component<{}, Stores> {
+  render() {
+    return (
+      <Provider userInfo={this.state.userInfo}
+                intl={this.state.intl}
+                initialState={this.state.initialState}>
+        <Container/>
+      </Provider>
+    );
+  }
+  
+  componentWillMount() {
+    if (window.__INITIAL_STATE__) {
+      const userInfo: UserInfoStore = new UserInfoStore;
+      
+      intlStore.updateLanguage(window.__INITIAL_STATE__.intl.language);
+      userInfo.updateUser(window.__INITIAL_STATE__.userInfo.user);
+      
+      this.setState({
+        intl: intlStore,
+        userInfo,
+        initialState: new InitialStateStore(window.__INITIAL_STATE__),
+      });
+    } else {
+      this.setState({
+        intl: intlStore,
+        userInfo: new UserInfoStore,
+        initialState: new InitialStateStore,
+      });
+    }
+  }
+}
+
 if (window.__INITIAL_STATE__) {
-  const intl: IntlStore = new IntlStore;
-  const userInfo: UserInfoStore = new UserInfoStore;
-  
-  intl.updateLanguage(window.__INITIAL_STATE__.intl.language);
-  userInfo.updateUser(window.__INITIAL_STATE__.userInfo.user);
-  
   ReactDOM.hydrate((
-    <Provider userInfo={userInfo} intl={intl} initialState={new InitialStateStore(window.__INITIAL_STATE__)}>
-      <Container/>
-    </Provider>
+    <MobXProvider/>
   ), document.querySelector('#app'));
 } else {
   ReactDOM.render((
-    <Provider userInfo={new UserInfoStore} intl={new IntlStore} initialState={new InitialStateStore}>
-      <Container/>
-    </Provider>
+    <MobXProvider/>
   ), document.querySelector('#app'));
 }
 
@@ -41,12 +69,6 @@ if (module.hot) {
       const link: HTMLLinkElement = links[f];
       link.href = link.href.replace(/(\?\d+)?$/, `?${Date.now()}`);
     }
-    
-    // remove modals
-    closeModals();
-    
-    // alive body scroll
-    //document.body.style.overflow = '';
     
     success();
   };

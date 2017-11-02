@@ -19,7 +19,7 @@
     ],
     "port": 3100
   },
-  "ssr": {
+  "server": {
     "entry": "./src/server",
     "port": 4100
   },

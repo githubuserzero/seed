@@ -40,9 +40,6 @@
       "utils": [
         "shared/utils"
       ],
-      "open-react-modal": [
-        "shared/open-react-modal"
-      ],
       "messages/*": [
         "shared/messages/*"
       ],
@@ -51,6 +48,9 @@
       ],
       "templates": [
         "shared/templates"
+      ],
+      "open-react-modal": [
+        "shared/open-react-modal"
       ]
     }
   }

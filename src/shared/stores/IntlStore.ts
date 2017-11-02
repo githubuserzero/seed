@@ -8,7 +8,14 @@ addLocaleData(require('react-intl/locale-data/ko'));
 
 type Messages = {[language: string]: {[id: string]: string}};
 
-export default class IntlStore {
+interface IntlStore {
+  readonly language: string;
+  readonly messages: {[id: string]: string};
+  
+  updateLanguage: (language: Language) => void;
+}
+
+class IntlStoreImpl implements IntlStore {
   @observable
   language: string = Cookie.get('locale') || 'en';
   
@@ -31,3 +38,10 @@ export default class IntlStore {
     return this._messages[this.language];
   }
 }
+
+const intlStore: IntlStore = new IntlStoreImpl;
+
+export {
+  intlStore,
+  IntlStore,
+};

@@ -3,8 +3,9 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const proxyMiddleware = require('http-proxy-middleware');
+const compression = require('compression');
 
-const {web, ssr} = require('./config.json');
+const {web, server} = require('./config.json');
 const config = require('./webpack.config');
 
 config({action: 'serve:web', port: web.port}).then(config => {
@@ -29,8 +30,10 @@ config({action: 'serve:web', port: web.port}).then(config => {
         webpackHotMiddleware(bundler),
         
         proxyMiddleware(['**', '!**/*.*'], {
-          target: 'http://localhost:' + ssr.port,
+          target: 'http://localhost:' + server.port,
         }),
+  
+        compression(),
         
         //(req, res, next) => {
         //  res.setHeader('Cache-control', 'no-cache');

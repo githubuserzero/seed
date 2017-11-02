@@ -3,7 +3,7 @@ import * as express from 'express';
 import { Provider } from 'mobx-react';
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
-import { InitialStateStore, IntlStore, UserInfoStore } from 'stores';
+import { InitialStateStore, intlStore, UserInfoStore } from 'stores';
 import { ServerStyleSheet } from 'styled-components';
 import * as templates from 'templates';
 import { App } from '../components';
@@ -12,8 +12,7 @@ const router: express.Router = express.Router();
 
 function render(req: express.Request, contentsState: Partial<InitialState>): string {
   // create stores
-  const intl: IntlStore = new IntlStore;
-  intl.updateLanguage(req.cookies.locale || 'en');
+  intlStore.updateLanguage(req.cookies.locale || 'en');
   
   const userInfo: UserInfoStore = new UserInfoStore;
   userInfo.updateUser({firstName: 'Seoyeon', lastName: 'Lee', age: 38});
@@ -21,7 +20,7 @@ function render(req: express.Request, contentsState: Partial<InitialState>): str
   // create state
   const initialState: InitialState = Object.assign({
     intl: {
-      language: intl.language,
+      language: intlStore.language,
     },
     userInfo: {
       user: userInfo.user,
@@ -31,7 +30,9 @@ function render(req: express.Request, contentsState: Partial<InitialState>): str
   // render with styled-components
   const sheet: ServerStyleSheet = new ServerStyleSheet;
   const body: string = renderToString(sheet.collectStyles((
-    <Provider userInfo={userInfo} intl={intl} initialState={new InitialStateStore(initialState)}>
+    <Provider userInfo={userInfo}
+              intl={intlStore}
+              initialState={new InitialStateStore(initialState)}>
       <App url={req.url}/>
     </Provider>
   )));

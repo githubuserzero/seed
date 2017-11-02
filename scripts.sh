@@ -11,7 +11,7 @@ case ${1} in
     eval $(node publish-libs.js);
     ;;
   start)
-    osascript -e 'tell application "Terminal" to do script "cd '$CURRENT_PATH'; npm run watch:ssr:dev"';
+    osascript -e 'tell application "Terminal" to do script "cd '$CURRENT_PATH'; npm run watch:server:dev"';
     osascript -e 'tell application "Terminal" to do script "cd '$CURRENT_PATH'; npm run nodemon"';
     osascript -e 'tell application "Terminal" to do script "cd '$CURRENT_PATH'; npm run serve"';
     ;;

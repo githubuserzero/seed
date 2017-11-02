@@ -1,4 +1,3 @@
-import { closeModals } from 'open-react-modal';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Container from './Container';
@@ -22,12 +21,6 @@ if (module.hot) {
       const link: HTMLLinkElement = links[f];
       link.href = link.href.replace(/(\?\d+)?$/, `?${Date.now()}`);
     }
-    
-    // remove modals
-    closeModals();
-    
-    // alive body scroll
-    //document.body.style.overflow = '';
     
     success();
   };

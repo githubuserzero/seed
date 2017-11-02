@@ -8,6 +8,6 @@ interface Props {
 
 export default styled(({source, className}: Props) => {
   return <pre className={className}><code>{source}</code></pre>;
-})`// styled
+})`
   margin-top: 1.4rem;
 `;

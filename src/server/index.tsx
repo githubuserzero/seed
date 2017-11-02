@@ -15,7 +15,7 @@ app.use(cookieParser());
 app.use(routers.app);
 app.use(routers.showcase);
 
-const port: number = process.env.PORT || config.ssr.port;
+const port: number = process.env.PORT || config.server.port;
 
 app.listen(port, () => {
   console.log(`SSR server started ${port} [${moment().format('HH:mm:ss')}]`);

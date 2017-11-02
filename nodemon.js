@@ -2,7 +2,7 @@ const nodemon = require('nodemon');
 
 nodemon({
   watch: [
-    'dist-dev/ssr/',
+    'dist-dev/server/',
   ],
-  exec: 'node ./dist-dev/ssr',
+  exec: 'node ./dist-dev/server',
 });
