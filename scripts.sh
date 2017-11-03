@@ -11,8 +11,24 @@ case ${1} in
     eval $(node publish-libs.js);
     ;;
   start)
-    osascript -e 'tell application "Terminal" to do script "cd '$CURRENT_PATH'; npm run watch:server:dev"';
-    osascript -e 'tell application "Terminal" to do script "cd '$CURRENT_PATH'; npm run nodemon"';
-    osascript -e 'tell application "Terminal" to do script "cd '$CURRENT_PATH'; npm run serve"';
+    osascript << EOT
+      tell application "iTerm"
+        set serverWatchWindow to (create window with default profile)
+          tell current session of serverWatchWindow
+            write text "cd $CURRENT_PATH; npm run watch:server:dev"
+            
+            set servePane to (split vertically with default profile)
+            tell servePane
+              write text "cd $CURRENT_PATH; npm run serve"
+            end tell
+            
+            set nodemonPane to (split horizontally with default profile)
+            tell nodemonPane
+              write text "cd $CURRENT_PATH; npm run nodemon"
+            end tell
+          end tell
+        activate
+      end tell
+EOT
     ;;
 esac
