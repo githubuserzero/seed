@@ -16,41 +16,20 @@
     ],
     "baseUrl": "src",
     "paths": {
-      "actions": [
-        "shared/actions"
+      "app": [
+        "app"
       ],
-      "components": [
-        "shared/components"
-      ],
-      "data": [
-        "shared/data"
-      ],
-      "frame": [
-        "shared/frame"
-      ],
-      "services": [
-        "shared/services"
-      ],
-      "stores": [
-        "shared/stores"
-      ],
-      "styles": [
-        "shared/styles"
-      ],
-      "utils": [
-        "shared/utils"
-      ],
-      "messages/*": [
-        "shared/messages/*"
+      "app/*": [
+        "app/*"
       ],
       "contents/*": [
-        "shared/contents/*"
+        "contents/*"
       ],
-      "templates": [
-        "shared/templates"
+      "messages/*": [
+        "messages/*"
       ],
       "open-react-modal": [
-        "shared/open-react-modal"
+        "library/open-react-modal"
       ]
     }
   }

@@ -2,16 +2,16 @@
   "web": {
     "entry": {
       "init": [
-        "./src/client/polyfills"
+        "./src/boot/client/polyfills"
       ],
-      "app": "./src/client/app",
-      "html-app": "./src/client/html-app",
-      "showcase": "./src/client/showcase"
+      "app": "./src/boot/client/app",
+      "html-app": "./src/boot/client/html-app",
+      "showcase": "./src/boot/client/showcase"
     },
     "dll": {
       "dll": [
-        "./src/client/vendor",
-        "./src/client/polyfills"
+        "./src/boot/client/vendor",
+        "./src/boot/client/polyfills"
       ]
     },
     "externals": {},
@@ -21,7 +21,7 @@
     "port": 3100
   },
   "server": {
-    "entry": "./src/server",
+    "entry": "./src/boot/server",
     "port": 4100
   },
   "libs": {

@@ -28,7 +28,7 @@ const createTSConfig = ({name, groupDir, indexFile}) => {
     "baseUrl": "src"
   },
   "files": [
-    "src/shared/${groupDir}${name}/${indexFile}"
+    "src/library/${groupDir}${name}/${indexFile}"
   ]
 }
   `;
@@ -36,7 +36,7 @@ const createTSConfig = ({name, groupDir, indexFile}) => {
 
 const createWebpackConfig = ({name, groupDir, indexFile, libExternals}) => {
   const copyPlugin = (() => {
-    const from = 'src/shared/' + groupDir + name;
+    const from = 'src/library/' + groupDir + name;
     const to = 'dist/libs/' + groupDir + name;
     const list = glob.sync(from + '/**/!(*.ts|*.tsx)')
                      .filter(file => {
@@ -63,7 +63,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
 const include = file => {
-  return file.indexOf(path.resolve(__dirname, 'src/shared/${groupDir}${name}')) === 0;
+  return file.indexOf(path.resolve(__dirname, 'src/library/${groupDir}${name}')) === 0;
 };
 
 module.exports = () => new Promise(resolve => {
@@ -72,7 +72,7 @@ module.exports = () => new Promise(resolve => {
   const config = {
     devtool: 'source-map',
     
-    entry: () => './src/shared/${groupDir}${name}/${indexFile}',
+    entry: () => './src/library/${groupDir}${name}/${indexFile}',
     
     externals: [nodeExternals()].concat(${JSON.stringify(libExternals)}),
     
@@ -140,7 +140,7 @@ console.log(Object.keys(libs.entry).reduce(($, name) => {
   const {commands, libExternals} = $;
   const {group} = libs.entry[name];
   const groupDir = group ? group + '/' : '';
-  const indexFile = fs.existsSync('src/shared/' + groupDir + name + '/index.tsx')
+  const indexFile = fs.existsSync('src/library/' + groupDir + name + '/index.tsx')
     ? 'index.tsx'
     : 'index.ts';
   

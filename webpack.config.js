@@ -30,13 +30,17 @@ const baseConfig = () => ({
   
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
-    alias: fs.readdirSync('src/shared')
-             .map(dir => 'src/shared/' + dir)
+    alias: fs.readdirSync('src/library')
+             .map(dir => 'src/library/' + dir)
              .filter(dir => fs.statSync(dir).isDirectory())
              .reduce((alias, dir) => {
                alias[path.basename(dir)] = path.resolve(__dirname, dir);
                return alias;
-             }, {}),
+             }, {
+               app: __dirname + '/src/app',
+               contents: __dirname + '/src/contents',
+               messages: __dirname + '/src/messages',
+             }),
   },
   
   resolveLoader: {
@@ -109,42 +113,6 @@ const baseConfig = () => ({
     ],
   },
 });
-
-//const webDevelopmentConfig = () => merge(baseConfig(), {
-//  plugins: [
-//    extractCSS,
-//    ...Object.keys(web.dll).map(name => {
-//      return new webpack.DllReferencePlugin({
-//        context: '.',
-//        manifest: require(`./dist-dev/dll/monitoring/assets/${name}-manifest.json`),
-//      });
-//    }),
-//  ],
-//});
-
-//const webProductionConfig = () => merge(baseConfig(), {
-//  plugins: [
-//    new webpack.optimize.CommonsChunkPlugin({
-//      name: 'shared',
-//      chunks: Object.keys(web.entry),
-//    }),
-//    new webpack.optimize.ModuleConcatenationPlugin(),
-//    extractCSS,
-//  ],
-//});
-
-//const serverDevelopmentConfig = () => merge(baseConfig(), {
-//  plugins: [
-//    extractCSS,
-//  ],
-//});
-
-//const serverProductionConfig = () => merge(baseConfig(), {
-//  plugins: [
-//    new webpack.optimize.ModuleConcatenationPlugin(),
-//    extractCSS,
-//  ],
-//});
 
 const webDLLBuild = () => merge(baseConfig(), {
   devtool: 'source-map',
