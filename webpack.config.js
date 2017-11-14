@@ -8,6 +8,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const rimraf = require('rimraf');
 const nodeExternals = require('webpack-node-externals');
 
+const tsconfig = require('./tsconfig.json');
 const {web, server} = require('./config.json');
 const src = path.join(__dirname, 'src');
 
@@ -265,6 +266,26 @@ const serverDevelopmentBuild = () => merge(baseConfig(), {
   externals: [nodeExternals()],
 });
 
+const electronDevelopmentBuild = () => merge(baseConfig(), {
+  target: 'node',
+  devtool: 'source-map',
+  
+  entry: web.entry,
+  
+  output: {
+    path: path.join(__dirname, 'dist-dev/electron'),
+    libraryTarget: 'commonjs2',
+  },
+  
+  plugins: [
+    extractCSS,
+  ],
+  
+  externals: [nodeExternals({
+    whitelist: Object.keys(tsconfig.compilerOptions.paths),
+  })],
+});
+
 module.exports = ({action, port}) => new Promise((resolve, reject) => {
   switch (action) {
     case 'build:web':
@@ -282,6 +303,9 @@ module.exports = ({action, port}) => new Promise((resolve, reject) => {
     case 'build:server:dev':
       rimraf('dist-dev/server', err => err ? reject(err) : resolve());
       break;
+    case 'build:electron:dev':
+      rimraf('dist-dev/electron', err => err ? reject(err) : resolve());
+      break;
     case 'serve:web':
       resolve();
       break;
@@ -298,6 +322,8 @@ module.exports = ({action, port}) => new Promise((resolve, reject) => {
       return serverProductionBuild();
     case 'build:server:dev':
       return serverDevelopmentBuild();
+    case 'build:electron:dev':
+      return electronDevelopmentBuild();
     case 'serve:web':
       return webServeConfig(port);
   }

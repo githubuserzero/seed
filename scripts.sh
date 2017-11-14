@@ -31,4 +31,21 @@ case ${1} in
       end tell
 EOT
     ;;
+  start:electron)
+    osascript << EOT
+      tell application "iTerm"
+        set electronWatchWindow to (create window with default profile)
+          tell current session of electronWatchWindow
+            write text "cd $CURRENT_PATH; npm run watch:electron:dev"
+            
+            set electronPane to (split vertically with default profile)
+            tell electronPane
+              delay 10
+              write text "cd $CURRENT_PATH; npm run electron"
+            end tell
+          end tell
+        activate
+      end tell
+EOT
+    ;;
 esac

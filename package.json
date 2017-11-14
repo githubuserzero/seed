@@ -22,7 +22,11 @@
     "subtree:server": "git subtree push --prefix dist/server origin subtree/server",
     "subtree": "npm run subtree:web && npm run subtree:server",
     "lint": "tslint 'src/**/!(*.spec|*.test).ts?(x)'",
-    "build:messages": "node src/messages/build-messages.js"
+    "build:messages": "node src/messages/build-messages.js",
+    "build:electron:dev": "webpack --env.action=build:electron:dev",
+    "watch:electron:dev": "webpack --watch --env.action=build:electron:dev",
+    "electron": "electron start-electron.js",
+    "start:electron": "sh scripts.sh start:electron"
   },
   "license": "MIT",
   "repository": {
@@ -63,6 +67,7 @@
     "url-search-params-polyfill": "^2.0.0"
   },
   "devDependencies": {
+    "electron": "^1.7.9",
     "@types/autoprefixer": "^6.7.3",
     "@types/body-parser": "^1.16.8",
     "@types/browser-sync": "0.0.37",
