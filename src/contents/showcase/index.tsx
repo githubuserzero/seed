@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { RouterContents, RouterNavigation } from './components';
+import './index.scss';
 
 export interface Props {
 
