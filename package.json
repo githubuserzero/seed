@@ -1,6 +1,6 @@
 {
   "name": "seed",
-  "version": "2017.4.0",
+  "version": "2017.5.0",
   "description": "{project-description}",
   "scripts": {
     "build:web": "webpack --env.action=build:web",
@@ -162,7 +162,7 @@
     "moduleDirectories": [
       "node_modules",
       "src",
-      "src/library"
+      "src/_library"
     ],
     "coverageDirectory": "coverage"
   }

@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const path = require('path');
-const fs = require('fs');
 const merge = require('webpack-merge');
 const {CheckerPlugin} = require('awesome-typescript-loader');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -11,6 +10,7 @@ const nodeExternals = require('webpack-node-externals');
 const tsconfig = require('./tsconfig.json');
 const {web, server} = require('./config.json');
 const src = path.join(__dirname, 'src');
+const alias = require('./webpack.alias');
 
 const extractCSS = new ExtractTextPlugin({filename: '[name].css', allChunks: true});
 
@@ -31,17 +31,7 @@ const baseConfig = () => ({
   
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
-    alias: fs.readdirSync('src/library')
-             .map(dir => 'src/library/' + dir)
-             .filter(dir => fs.statSync(dir).isDirectory())
-             .reduce((alias, dir) => {
-               alias[path.basename(dir)] = path.resolve(__dirname, dir);
-               return alias;
-             }, {
-               app: __dirname + '/src/app',
-               contents: __dirname + '/src/contents',
-               messages: __dirname + '/src/messages',
-             }),
+    alias,
   },
   
   resolveLoader: {
