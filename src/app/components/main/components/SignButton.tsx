@@ -25,7 +25,7 @@ class Component extends React.Component<Props & InternalProps, State> {
       ? (
         <button className={this.props.className}
                 onClick={() => this.props.dispatch(logout())}>
-          <FormattedMessage id="contents.app.sign-button.logout"/>
+          <FormattedMessage id="app.main.sign-button.logout"/>
           {' - '}
           {this.props.userInfo.user.firstName}
           {' '}
@@ -35,7 +35,7 @@ class Component extends React.Component<Props & InternalProps, State> {
       : (
         <button className={this.props.className}
                 onClick={() => this.props.dispatch(login())}>
-          <FormattedMessage id="contents.app.sign-button.login"/>
+          <FormattedMessage id="app.main.sign-button.login"/>
         </button>
       );
   }

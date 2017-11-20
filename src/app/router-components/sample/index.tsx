@@ -28,7 +28,7 @@ class Component extends React.Component<Props & InternalProps, State> {
   render() {
     return (
       <div>
-        <FormattedMessage id="contents.sample.text"/>
+        <FormattedMessage id="app.sample.text"/>
         <br/>
         {this.state.testString}
         <br/>

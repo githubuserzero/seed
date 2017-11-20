@@ -1,9 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-const alias = {
-  '_messages': __dirname + '/src/_messages',
-};
+const alias = {};
 
 fs.readdirSync('src')
   .filter(dir => dir[0] !== '_')

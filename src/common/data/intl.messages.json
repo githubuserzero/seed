@@ -1,0 +1,12 @@
+{
+  "en": {
+    "app.main.sign-button.login": "Login",
+    "app.main.sign-button.logout": "Logout",
+    "app.sample.text": "Sample Content"
+  },
+  "ko": {
+    "app.main.sign-button.login": "로그인",
+    "app.main.sign-button.logout": "로그아웃",
+    "app.sample.text": "샘플 컨텐츠"
+  }
+}

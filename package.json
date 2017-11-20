@@ -22,7 +22,7 @@
     "subtree:server": "git subtree push --prefix dist/server origin subtree/server",
     "subtree": "npm run subtree:web && npm run subtree:server",
     "lint": "tslint 'src/**/!(*.spec|*.test).ts?(x)'",
-    "build:messages": "node src/messages/build-messages.js",
+    "build:messages": "node build-messages.js",
     "build:electron:dev": "webpack --env.action=build:electron:dev",
     "watch:electron:dev": "webpack --watch --env.action=build:electron:dev",
     "electron": "electron start-electron.js",

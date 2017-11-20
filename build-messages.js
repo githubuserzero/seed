@@ -17,15 +17,13 @@ function flattenMessages(nestedMessages, prefix = '') {
   }, {});
 }
 
-glob(path.resolve(__dirname, '../**/messages/*.json'), (err, matches) => {
+glob(path.resolve('./src/**/messages/*.json'), (err, matches) => {
   if (err) throw err;
   const translations = new Map;
   const keys = new Set;
   const languages = new Set;
   
   for (const match of matches) {
-    if (path.dirname(match) === __dirname) continue;
-    
     const text = fs.readFileSync(match, {encoding: 'utf8'});
     const language = /\/([a-z]{2}).json$/.exec(match)[1];
     const messages = flattenMessages(JSON.parse(text));
@@ -43,14 +41,15 @@ glob(path.resolve(__dirname, '../**/messages/*.json'), (err, matches) => {
     }
   }
   
+  const messages = {};
+  
   for (const language of languages) {
-    const messages = {};
+    messages[language] = {};
     
     for (const key of keys) {
-      messages[key] = translations.get(language)[key] || '{{' + key + '}}';
+      messages[language][key] = translations.get(language)[key] || '{{' + key + '}}';
     }
-    
-    //console.log('build-messages.js..()', language, JSON.stringify(messages, null, 2));
-    fs.writeFileSync(__dirname + '/' + language + '.json', JSON.stringify(messages, null, 2));
   }
+  //console.log('build-messages.js..()', JSON.stringify(messages, null, 2));
+  fs.writeFileSync(__dirname + '/src/common/data/intl.messages.json', JSON.stringify(messages, null, 2));
 });
