@@ -268,6 +268,9 @@ const electronDevelopmentBuild = () => merge(baseConfig(), {
   
   plugins: [
     extractCSS,
+    new CopyWebpackPlugin([
+      ...web.static.map(dir => ({from: dir})),
+    ]),
   ],
   
   externals: [nodeExternals({
