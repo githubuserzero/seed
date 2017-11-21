@@ -1,6 +1,5 @@
-import { Language, languages } from 'common';
 import { changeLanguage } from 'common/actions';
-import { IntlStore } from 'common/data';
+import { IntlStore, Language, languages } from 'common/data';
 import { Dispatch, dispatcher } from 'mobx-dispatcher';
 import { inject, observer } from 'mobx-react';
 import * as React from 'react';
