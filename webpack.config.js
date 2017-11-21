@@ -7,7 +7,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const rimraf = require('rimraf');
 const nodeExternals = require('webpack-node-externals');
 
-const tsconfig = require('./tsconfig.json');
 const {web, server} = require('./config.json');
 const src = path.join(__dirname, 'src');
 const alias = require('./webpack.alias');
@@ -272,7 +271,7 @@ const electronDevelopmentBuild = () => merge(baseConfig(), {
   ],
   
   externals: [nodeExternals({
-    whitelist: Object.keys(tsconfig.compilerOptions.paths),
+    whitelist: Object.keys(alias),
   })],
 });
 
