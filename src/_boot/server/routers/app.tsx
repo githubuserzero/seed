@@ -1,12 +1,12 @@
 import { InitialState, InitialStateStore, UserInfoStore } from 'app/common/data';
 import { intlStore } from 'common/data';
+import * as templates from 'common/templates';
 import * as express from 'express';
 import { Provider } from 'mobx-react';
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 import { ServerStyleSheet } from 'styled-components';
 import { App } from '../components';
-import * as templates from '../templates';
 
 const router: express.Router = express.Router();
 
