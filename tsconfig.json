@@ -16,29 +16,12 @@
     ],
     "baseUrl": "src",
     "paths": {
-      "_messages/*": [
-        "_messages/*"
+      "*": [
+        "*",
+        "_library/*"
       ],
-      "common": [
-        "common"
-      ],
-      "common/*": [
-        "common/*"
-      ],
-      "app": [
-        "app"
-      ],
-      "app/*": [
-        "app/*"
-      ],
-      "showcase": [
-        "showcase"
-      ],
-      "showcase/*": [
-        "showcase/*"
-      ],
-      "open-react-modal": [
-        "_library/open-react-modal"
+      "*/*": [
+        "*/*"
       ]
     }
   }
