@@ -1,6 +1,7 @@
 import * as Cookie from 'js-cookie';
 import { action, computed, observable } from 'mobx';
 import { addLocaleData } from 'react-intl';
+import IntlMessageFormat from 'intl-messageformat';
 
 export type Language = 'en' | 'ko';
 export const languages: Language[] = ['en', 'ko'];
@@ -15,6 +16,7 @@ interface IntlStore {
   readonly messages: {[id: string]: string};
   
   updateLanguage: (language: Language) => void;
+  formatMessage: (message: string, values?: object) => string;
 }
 
 class IntlStoreImpl implements IntlStore {
@@ -36,6 +38,11 @@ class IntlStoreImpl implements IntlStore {
   get messages(): {[id: string]: string} {
     return this._messages[this.language];
   }
+  
+  formatMessage = (messageId: string, values?: object) => {
+    const format: IntlMessageFormat = new IntlMessageFormat(this.messages[messageId], this.language);
+    return format.format(values);
+  };
 }
 
 const intlStore: IntlStore = new IntlStoreImpl;
