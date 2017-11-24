@@ -14,8 +14,8 @@
     "publish:libs": "sh scripts.sh publish:libs",
     "nodemon": "node nodemon.js",
     "serve": "node browser-sync.js",
-    "build": "npm run build:web && npm run build:server && npm run build:libs",
-    "start": "sh scripts.sh start",
+    "build": "npm run build:messages && npm run build:web && npm run build:server && npm run build:libs",
+    "start": "npm run build:messages && sh scripts.sh start",
     "test": "jest",
     "coverage": "jest --coverage",
     "subtree:web": "git subtree push --prefix dist/web origin subtree/web",
@@ -26,7 +26,7 @@
     "build:electron:dev": "webpack --env.action=build:electron:dev",
     "watch:electron:dev": "webpack --watch --env.action=build:electron:dev",
     "electron": "electron start-electron.js",
-    "start:electron": "sh scripts.sh start:electron"
+    "start:electron": "npm run build:messages && sh scripts.sh start:electron"
   },
   "license": "MIT",
   "repository": {
