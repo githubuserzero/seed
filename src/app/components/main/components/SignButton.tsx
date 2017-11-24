@@ -3,7 +3,7 @@ import { UserInfoStore } from 'app/common/data';
 import { Dispatch, dispatcher } from 'mobx-dispatcher';
 import { inject, observer } from 'mobx-react';
 import * as React from 'react';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import styled from 'styled-components';
 
 export interface Props {
@@ -25,7 +25,7 @@ class Component extends React.Component<Props & InternalProps, State> {
       ? (
         <button className={this.props.className}
                 onClick={() => this.props.dispatch(logout())}>
-          <FormattedMessage id="app.main.sign-button.logout"/>
+          {this.props.intl.formatMessage({id: 'app.main.sign-button.logout'})}
           {' - '}
           {this.props.userInfo.user.firstName}
           {' '}
@@ -35,7 +35,7 @@ class Component extends React.Component<Props & InternalProps, State> {
       : (
         <button className={this.props.className}
                 onClick={() => this.props.dispatch(login())}>
-          <FormattedMessage id="app.main.sign-button.login"/>
+          {this.props.intl.formatMessage({id: 'app.main.sign-button.login'})}
         </button>
       );
   }

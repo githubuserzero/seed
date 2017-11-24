@@ -2,7 +2,7 @@ import { InitialStateStore } from 'app/common/data';
 import { inject } from 'mobx-react';
 import * as React from 'react';
 import { createPortal } from 'react-dom';
-import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { PortalSample } from './components';
 
 export interface Props {
@@ -28,7 +28,7 @@ class Component extends React.Component<Props & InternalProps, State> {
   render() {
     return (
       <div>
-        <FormattedMessage id="app.sample.text"/>
+        {this.props.intl.formatMessage({id: 'app.sample.text'})}
         <br/>
         {this.state.testString}
         <br/>
