@@ -4,5 +4,5 @@ nodemon({
   watch: [
     'dist-dev/server/',
   ],
-  exec: 'node ./dist-dev/server',
+  exec: 'node -r source-map-support/register ./dist-dev/server',
 });
