@@ -1,13 +1,15 @@
-const {web} = require('./config.json');
-const alias = require('./webpack.alias');
+const config = require('./config.json');
+const createSSenpack = require('ssenpack');
 
 // NOTICE
 // This file is for Webstorm (IntelliJ) alias support.
 
+const {editor} = createSSenpack(config);
+
 module.exports = {
   resolve: {
-    alias,
+    alias: editor.alias(),
   },
   
-  externals: web.externals,
+  externals: config.web.externals,
 };

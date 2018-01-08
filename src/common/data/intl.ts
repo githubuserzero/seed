@@ -24,7 +24,7 @@ class IntlStoreImpl implements IntlStore {
   language: string = Cookie.get('locale') || 'en';
   
   @observable
-  private _messages: Messages = require('./intl.messages.json');
+  private _messages: Messages = require('../../messages.json');
   
   @action
   updateLanguage = (language: Language) => {

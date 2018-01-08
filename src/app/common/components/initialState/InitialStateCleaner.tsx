@@ -37,4 +37,4 @@ class Component extends React.Component<Props & InternalProps, State> {
   }
 }
 
-export default withRouter<Props>(Component) as React.ComponentClass<Props>;
+export default withRouter<Props & InternalProps>(Component) as React.ComponentClass<Props>;
