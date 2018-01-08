@@ -3,7 +3,7 @@ import * as cookieParser from 'cookie-parser';
 import * as express from 'express';
 import * as React from 'react';
 import * as config from '../../../config.json';
-import * as routers from './routers';
+import * as routers from 'server/routers';
 import * as moment from 'moment';
 
 const app: express.Express = express();
