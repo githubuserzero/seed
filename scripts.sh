@@ -12,16 +12,16 @@ case ${1} in
       tell application "iTerm"
         set serverWatchWindow to (create window with default profile)
           tell current session of serverWatchWindow
-            write text "cd $CURRENT_PATH; ssenpack web.server.dev.build.watch"
+            write text "cd $CURRENT_PATH; npm run web.server.dev.build.watch"
             
             set servePane to (split vertically with default profile)
             tell servePane
-              write text "cd $CURRENT_PATH; ssenpack web.dev.start"
+              write text "cd $CURRENT_PATH; npm run web.dev.start"
             end tell
             
             set nodemonPane to (split horizontally with default profile)
             tell nodemonPane
-              write text "cd $CURRENT_PATH; ssenpack web.server.dev.start"
+              write text "cd $CURRENT_PATH; npm run web.server.dev.start"
             end tell
           end tell
         activate
@@ -33,12 +33,12 @@ EOT
       tell application "iTerm"
         set electronWatchWindow to (create window with default profile)
           tell current session of electronWatchWindow
-            write text "cd $CURRENT_PATH; ssenpack electron.dev.build.watch"
+            write text "cd $CURRENT_PATH; npm run electron.dev.build.watch"
             
             set electronPane to (split vertically with default profile)
             tell electronPane
               delay 10
-              write text "cd $CURRENT_PATH; electron index.electron.js"
+              write text "cd $CURRENT_PATH; npm run electron.dev.start"
             end tell
           end tell
         activate
