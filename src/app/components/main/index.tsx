@@ -1,6 +1,7 @@
 import { RouterNavigation } from 'app/common/components/route';
 import * as React from 'react';
 import { LanguageChangeButton, SignButton } from './components';
+import 'index.scss';
 
 export interface Props {
   routerContents: React.ReactElement<{}>;
