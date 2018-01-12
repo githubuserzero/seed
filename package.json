@@ -1,6 +1,6 @@
 {
   "name": "seed",
-  "version": "2018.1.1",
+  "version": "2018.1.2",
   "description": "{project-description}",
   "scripts": {
     "electron.dev.build": "ssenpack electron.dev.build",
@@ -84,7 +84,7 @@
     "electron": "^1.7.10",
     "jest": "^22.0.5",
     "pre-commit": "^1.2.2",
-    "ssenpack": "^2018.1.1",
+    "ssenpack": "^2018.1.2",
     "ts-jest": "^22.0.1",
     "tslint": "^5.9.1",
     "typescript": "^2.6.2"
