@@ -20,6 +20,8 @@ interface State {
 
 @inject('initialState')
 class Component extends React.Component<Props & InternalProps, State> {
+  static displayName: string = 'Component35529047';
+  
   state: State = {
     testString: 'Initial Value',
     portal: null,

@@ -13,6 +13,8 @@ interface State {
 }
 
 class Component extends React.Component<Props & InternalProps, State> {
+  static displayName: string = 'Showcase';
+  
   render() {
     return (
       <StaticRouter location={this.props.url} context={{}}>

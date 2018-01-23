@@ -20,6 +20,8 @@ interface State {
 
 @inject('userInfo') @dispatcher @observer
 class Component extends React.Component<Props & InternalProps, State> {
+  static displayName: string = 'SignButton';
+  
   render() {
     return this.props.userInfo.user
       ? (

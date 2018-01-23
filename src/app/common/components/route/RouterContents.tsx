@@ -13,6 +13,8 @@ interface State {
 }
 
 class Component extends React.Component<Props & InternalProps, State> {
+  static displayName: string = 'RouterContents';
+  
   render() {
     return [
       <Route exact path="/" component={require('app/router-components/main').default}/>,

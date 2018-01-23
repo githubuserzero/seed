@@ -17,6 +17,8 @@ interface State {
 
 @dispatcher
 class Component extends React.Component<Props & InternalProps, State> {
+  static displayName: string = 'InitialStateCleaner';
+  
   render() {
     return null;
   }

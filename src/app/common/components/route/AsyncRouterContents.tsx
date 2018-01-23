@@ -14,6 +14,8 @@ interface State {
 }
 
 class Component extends React.Component<Props & InternalProps, State> {
+  static displayName: string = 'AsyncRouterContents';
+  
   render() {
     return [
       <Route exact path="/" render={renderRoute(() => import('app/router-components/main'))}/>,

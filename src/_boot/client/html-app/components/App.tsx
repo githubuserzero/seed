@@ -19,6 +19,8 @@ interface State {
 
 @inject('intl') @observer
 class Component extends React.Component<Props & InternalProps, State> {
+  static displayName: string = 'App';
+  
   render() {
     return (
       <IntlProvider locale={this.props.intl.language} messages={this.props.intl.messages}>

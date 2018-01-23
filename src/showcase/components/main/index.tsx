@@ -14,6 +14,8 @@ interface State {
 }
 
 class Component extends React.Component<Props & InternalProps, State> {
+  static displayName: string = 'Component29708806';
+  
   render() {
     return (
       <div>
