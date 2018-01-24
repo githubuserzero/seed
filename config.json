@@ -9,7 +9,8 @@
       "showcase": "./src/_boot/client/showcase"
     },
     "dll": {
-      "dll": [
+      "name": "dll",
+      "entry": [
         "./src/_boot/client/vendor",
         "./src/_boot/client/polyfills"
       ]
