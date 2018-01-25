@@ -1,6 +1,6 @@
 import { InitialState, InitialStateStore, UserInfoStore } from 'app/data';
 import { intlStore } from 'common/data';
-import * as templates from 'common/templates';
+import * as templates from 'server/templates';
 import * as express from 'express';
 import { Provider } from 'mobx-react';
 import * as React from 'react';

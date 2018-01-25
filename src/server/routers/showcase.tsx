@@ -1,4 +1,4 @@
-import * as templates from 'common/templates';
+import * as templates from 'server/templates';
 import * as express from 'express';
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
