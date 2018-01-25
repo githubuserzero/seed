@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Description, Source } from 'showcase/common/components/showcase';
+import { Description, Source } from 'showcase/components/showcase';
 import Sample from './Sample.sample';
 
 export default () => (

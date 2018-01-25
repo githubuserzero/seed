@@ -1,4 +1,4 @@
-import { RouterContents } from 'app/common/components/route';
+import RouterContents from 'app/components/route/RouterContents';
 import Main from 'app/components/main';
 import { IntlStore } from 'common/data';
 import { inject, observer } from 'mobx-react';

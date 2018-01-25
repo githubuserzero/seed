@@ -1,4 +1,4 @@
-import { cleanInitialState } from 'app/common/actions';
+import { cleanInitialState } from 'app/actions';
 import { Dispatch, dispatcher } from 'mobx-dispatcher';
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';

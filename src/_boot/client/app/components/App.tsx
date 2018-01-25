@@ -1,5 +1,5 @@
-import { InitialStateCleaner } from 'app/common/components/initialState';
-import { AsyncRouterContents } from 'app/common/components/route';
+import { InitialStateCleaner } from 'app/components/initialState';
+import AsyncRouterContents from 'app/components/route/AsyncRouterContents';
 import Main from 'app/components/main';
 import { IntlStore } from 'common/data';
 import { inject, observer } from 'mobx-react';

@@ -1,4 +1,4 @@
-import { InitialState, InitialStateStore, UserInfoStore } from 'app/common/data';
+import { InitialState, InitialStateStore, UserInfoStore } from 'app/data';
 import { intlStore } from 'common/data';
 import * as templates from 'common/templates';
 import * as express from 'express';

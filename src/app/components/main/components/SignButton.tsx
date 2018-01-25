@@ -1,5 +1,5 @@
-import { login, logout } from 'app/common/actions';
-import { UserInfoStore } from 'app/common/data';
+import { login, logout } from 'app/actions';
+import { UserInfoStore } from 'app/data';
 import { Dispatch, dispatcher } from 'mobx-dispatcher';
 import { inject, observer } from 'mobx-react';
 import * as React from 'react';

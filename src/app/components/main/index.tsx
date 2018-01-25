@@ -1,4 +1,4 @@
-import { RouterNavigation } from 'app/common/components/route';
+import RouterNavigation from 'app/components/route/RouterNavigation';
 import * as React from 'react';
 import { LanguageChangeButton, SignButton } from './components';
 import './index.scss';

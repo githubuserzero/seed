@@ -1,4 +1,4 @@
-import { AsyncRouterContents } from 'app/common/components/route';
+import AsyncRouterContents from 'app/components/route/AsyncRouterContents';
 import Main from 'app/components/main';
 import { IntlStore } from 'common/data';
 import { inject, observer } from 'mobx-react';

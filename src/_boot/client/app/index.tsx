@@ -1,5 +1,5 @@
-import { AppProps } from 'app/common';
-import { InitialStateStore, UserInfoStore } from 'app/common/data';
+import { AppProps } from 'app';
+import { InitialStateStore, UserInfoStore } from 'app/data';
 import { intlStore } from 'common/data';
 import { Provider } from 'mobx-react';
 import * as React from 'react';

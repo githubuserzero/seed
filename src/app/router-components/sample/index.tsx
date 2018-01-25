@@ -1,4 +1,4 @@
-import { InitialStateStore } from 'app/common/data';
+import { InitialStateStore } from 'app/data';
 import { inject } from 'mobx-react';
 import * as React from 'react';
 import { createPortal } from 'react-dom';
