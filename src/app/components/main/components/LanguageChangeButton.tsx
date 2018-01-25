@@ -3,13 +3,12 @@ import { IntlStore, Language, languages } from 'common/data';
 import { Dispatch, dispatcher } from 'mobx-dispatcher';
 import { inject, observer } from 'mobx-react';
 import * as React from 'react';
-import styled from 'styled-components';
+import * as styles from './LanguageChangeButton.module.scss';
 
 export interface Props {
 }
 
 interface InternalProps {
-  className: string;
   intl: IntlStore;
   dispatch: Dispatch;
 }
@@ -23,7 +22,7 @@ class Component extends React.Component<Props & InternalProps, State> {
   
   render() {
     return (
-      <div className={this.props.className}>
+      <div className={styles.main}>
         {this.props.intl.language} :
         {
           languages.map(language => (
@@ -41,6 +40,4 @@ class Component extends React.Component<Props & InternalProps, State> {
   };
 }
 
-export default styled(Component)`
-  display: inline-block;
-` as React.ComponentClass<Props>;
+export default Component as React.ComponentClass<Props>;

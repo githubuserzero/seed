@@ -7,8 +7,6 @@ import 'mobx';
 import 'mobx-react';
 import 'mobx-dispatcher';
 
-import 'styled-components';
-
 import 'immutable';
 import 'moment';
 import 'numeral';

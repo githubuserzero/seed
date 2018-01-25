@@ -59,7 +59,6 @@
     "react-intl": "^2.4.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.0",
-    "styled-components": "^3.0.2",
     "url-search-params-polyfill": "^2.0.2"
   },
   "devDependencies": {

@@ -5,7 +5,6 @@ import * as express from 'express';
 import { Provider } from 'mobx-react';
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
-import { ServerStyleSheet } from 'styled-components';
 import { App } from '../components';
 
 const router: express.Router = express.Router();
@@ -27,23 +26,17 @@ function render(req: express.Request, contentsState: Partial<InitialState>): str
     },
   }, contentsState);
   
-  // render with styled-components
-  const sheet: ServerStyleSheet = new ServerStyleSheet;
-  const body: string = renderToString(sheet.collectStyles((
+  const body: string = renderToString((
     <Provider userInfo={userInfo}
               intl={intlStore}
               initialState={new InitialStateStore(initialState)}>
       <App url={req.url}/>
     </Provider>
-  )));
-  
-  // styled-components
-  const styleTags: string = sheet.getStyleTags();
+  ));
   
   return templates.app({
     body,
     initialState: JSON.stringify(initialState),
-    styleTags,
   });
 }
 

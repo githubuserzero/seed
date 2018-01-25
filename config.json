@@ -1,4 +1,11 @@
 {
+  "style": {
+    "themes": {
+      "module": {
+        "cssModule": true
+      }
+    }
+  },
   "web": {
     "entry": {
       "init": [

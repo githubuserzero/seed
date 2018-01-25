@@ -1,6 +1,6 @@
 import { TemplateParams } from './types';
 
-export default ({body, initialState, styleTags}: TemplateParams) => `
+export default ({body, initialState}: TemplateParams) => `
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,7 +9,6 @@ export default ({body, initialState, styleTags}: TemplateParams) => `
     <base href="/"/>
     <link rel="stylesheet" type="text/css" href="showcase.css?1"/>
     <title>Title...</title>
-    ${ typeof styleTags === 'string' ? styleTags : '' }
   </head>
   
   <body>

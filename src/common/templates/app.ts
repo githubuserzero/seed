@@ -1,6 +1,6 @@
 import { TemplateParams } from './types';
 
-export default ({body, initialState, styleTags}: TemplateParams) => `
+export default ({body, initialState}: TemplateParams) => `
 <!DOCTYPE html>
 <html>
   <head>
@@ -10,7 +10,6 @@ export default ({body, initialState, styleTags}: TemplateParams) => `
     <link rel="stylesheet" type="text/css" href="app.css?1"/>
     <title>Title...</title>
     ${ typeof initialState === 'string' ? `<script>window.__INITIAL_STATE__=${initialState.replace(/</g, '\\u003c')}</script>` : '' }
-    ${ typeof styleTags === 'string' ? styleTags : '' }
   </head>
   
   <body>
