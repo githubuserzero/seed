@@ -1,5 +1,5 @@
+import routerStore from 'app/route/syncRouterStore';
 import * as React from 'react';
-import { Route } from 'react-router-dom';
 
 export interface Props {
 
@@ -17,9 +17,9 @@ class Component extends React.Component<Props & InternalProps, State> {
   
   render() {
     return [
-      <Route exact path="/" component={require('app/router-components/main').default}/>,
-      <Route path="/sample" component={require('app/router-components/sample').default}/>,
-    ];
+      routerStore.getRoute('/'),
+      routerStore.getRoute('/sample'),
+    ].map((comp, i) => React.cloneElement(comp, {key: 'router-' + i}));
   }
 }
 

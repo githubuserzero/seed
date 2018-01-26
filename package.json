@@ -59,6 +59,7 @@
     "react-intl": "^2.4.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.0",
+    "ssenkit.router-store": "^1.0.0",
     "url-search-params-polyfill": "^2.0.2"
   },
   "devDependencies": {

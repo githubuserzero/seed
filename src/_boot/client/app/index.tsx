@@ -1,5 +1,6 @@
 import { AppProps } from 'app';
 import { InitialStateStore, UserInfoStore } from 'app/data';
+import routerStore from 'app/route/asyncRouterStore';
 import { intlStore } from 'common/data';
 import { Provider } from 'mobx-react';
 import * as React from 'react';
@@ -40,9 +41,11 @@ class MobXProvider extends React.Component<{}, AppProps> {
 }
 
 if (window.__INITIAL_STATE__) {
-  ReactDOM.hydrate((
-    <MobXProvider/>
-  ), document.querySelector('#app'));
+  routerStore.preload(location.pathname).then(() => {
+    ReactDOM.hydrate((
+      <MobXProvider/>
+    ), document.querySelector('#app'));
+  });
 } else {
   ReactDOM.render((
     <MobXProvider/>

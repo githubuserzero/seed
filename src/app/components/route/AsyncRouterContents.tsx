@@ -1,6 +1,5 @@
-import { renderRoute } from 'common/components/route';
+import routerStore from 'app/route/asyncRouterStore';
 import * as React from 'react';
-import { Route } from 'react-router-dom';
 
 export interface Props {
 
@@ -18,9 +17,9 @@ class Component extends React.Component<Props & InternalProps, State> {
   
   render() {
     return [
-      <Route exact path="/" render={renderRoute(() => import('app/router-components/main'))}/>,
-      <Route path="/sample" render={renderRoute(() => import('app/router-components/sample'))}/>,
-    ];
+      routerStore.getRoute('/'),
+      routerStore.getRoute('/sample'),
+    ].map((comp, i) => React.cloneElement(comp, {key: 'router-' + i}));
   }
 }
 

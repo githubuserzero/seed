@@ -19,7 +19,7 @@ class Component extends React.Component<Props & InternalProps, State> {
     return [
       <Link to="/">Home</Link>,
       <Link to="/sample">Sample</Link>,
-    ];
+    ].map((comp, i) => React.cloneElement(comp, {key: 'router-nav-' + i}));
   }
 }
 
