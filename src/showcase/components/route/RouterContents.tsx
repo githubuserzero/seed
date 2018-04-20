@@ -12,14 +12,16 @@ interface InternalProps {
 interface State {
 }
 
-class Component extends React.Component<Props & InternalProps, State> {
+class Component extends React.PureComponent<Props & InternalProps, State> {
   static displayName: string = 'RouterContents';
   
   render() {
-    return [
-      <Route exact path="/showcase" component={require('showcase/router-components/main').default}/>,
-      <Route path="/showcase/sample" component={require('showcase/router-components/sample').default}/>,
-    ];
+    return (
+      <React.Fragment>
+        <Route exact path="/showcase" component={require('showcase/router-components/main').default}/>
+        <Route path="/showcase/sample" component={require('showcase/router-components/sample').default}/>
+      </React.Fragment>
+    );
   }
 }
 

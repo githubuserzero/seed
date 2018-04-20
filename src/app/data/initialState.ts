@@ -1,12 +1,14 @@
+import { Language } from 'common/data';
+import * as Recontext from 'recontext';
 import { User } from './user';
 
 export interface InitialState {
-  intl: {
-    language: string;
+  message: {
+    language: Language;
   }
   
-  userInfo: {
-    user: User;
+  user: {
+    user: User | null;
   }
   
   sample?: {
@@ -14,19 +16,27 @@ export interface InitialState {
   }
 }
 
-export class InitialStateStore {
-  constructor(private initialState: InitialState = null) {
+export module initialState {
+  interface State {
+    initialState: InitialState | null;
   }
   
-  clean = () => {
-    this.initialState = null;
-  };
+  interface Actions {
+    clean: () => void;
+  }
   
-  hasState = () => {
-    return this.initialState !== null;
-  };
+  export type Store = State & Actions;
   
-  getState = () => {
-    return this.initialState;
-  };
+  export const createStore: Recontext.CreateStore<State, Actions> = Recontext.createStore<State, Actions>(
+    {
+      initialState: null,
+    },
+    setState => ({
+      clean: () => () => {
+        setState({
+          initialState: null,
+        });
+      },
+    }),
+  );
 }

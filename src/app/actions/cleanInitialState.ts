@@ -1,5 +1,7 @@
-import { AppProps } from 'app';
+import { ContextState } from 'app/context';
 
-export default () => ({initialState}: AppProps) => {
-  initialState.clean();
+export default () => ({initialState}: ContextState) => {
+  if (initialState.initialState) {
+    initialState.clean();
+  }
 }

@@ -1,5 +1,4 @@
-import { InitialStateStore } from 'app/data';
-import { inject } from 'mobx-react';
+import { ContextState, withConsumer } from 'app/context';
 import * as React from 'react';
 import { createPortal } from 'react-dom';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -9,23 +8,29 @@ export interface Props {
 
 }
 
-interface InternalProps extends InjectedIntlProps {
-  initialState: InitialStateStore;
+interface InternalProps extends InjectedIntlProps, ContextState {
 }
 
 interface State {
   testString: string;
-  portal: HTMLDivElement;
+  portal: HTMLDivElement | null;
 }
 
-@inject('initialState')
-class Component extends React.Component<Props & InternalProps, State> {
-  static displayName: string = 'Component35529047';
+class Component extends React.PureComponent<Props & InternalProps, State> {
+  static displayName: string = 'app.router-components.sample';
   
-  state: State = {
-    testString: 'Initial Value',
-    portal: null,
-  };
+  constructor(props: Props & InternalProps) {
+    super(props);
+    
+    const testString: string = props.initialState && props.initialState.initialState && props.initialState.initialState.sample
+      ? props.initialState.initialState.sample.testString
+      : 'InitialValue';
+    
+    this.state = {
+      testString,
+      portal: null,
+    };
+  }
   
   render() {
     return (
@@ -50,14 +55,6 @@ class Component extends React.Component<Props & InternalProps, State> {
       portal: div,
     });
   };
-  
-  componentWillMount() {
-    if (this.props.initialState.hasState()) {
-      this.setState({
-        testString: this.props.initialState.getState().sample.testString,
-      });
-    }
-  }
 }
 
-export default injectIntl<Props>(Component) as React.ComponentClass<Props>;
+export default injectIntl<Props>(withConsumer<Props & InternalProps>(Component)) as React.ComponentClass<Props>;

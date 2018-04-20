@@ -1,29 +1,25 @@
+import { ContextState, withConsumer } from 'app/context';
 import { changeLanguage } from 'common/actions';
-import { IntlStore, Language, languages } from 'common/data';
-import { Dispatch, dispatcher } from 'mobx-dispatcher';
-import { inject, observer } from 'mobx-react';
+import { Language, languages } from 'common/data';
 import * as React from 'react';
 import * as styles from './LanguageChangeButton.module.scss';
 
 export interface Props {
 }
 
-interface InternalProps {
-  intl: IntlStore;
-  dispatch: Dispatch;
+interface InternalProps extends ContextState {
 }
 
 interface State {
 }
 
-@inject('intl') @dispatcher @observer
-class Component extends React.Component<Props & InternalProps, State> {
+class Component extends React.PureComponent<Props & InternalProps, State> {
   static displayName: string = 'LanguageChangeButton';
   
   render() {
     return (
       <div className={styles.main}>
-        {this.props.intl.language} :
+        {this.props.message.language} :
         {
           languages.map(language => (
             <button key={language} onClick={() => this.change(language)}>
@@ -40,4 +36,4 @@ class Component extends React.Component<Props & InternalProps, State> {
   };
 }
 
-export default Component as React.ComponentClass<Props>;
+export default withConsumer<Props & InternalProps>(Component) as React.ComponentClass<Props>;

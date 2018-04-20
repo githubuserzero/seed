@@ -1,2 +1,1 @@
-export * from './immutable';
-export * from './intl';
+export * from './message';

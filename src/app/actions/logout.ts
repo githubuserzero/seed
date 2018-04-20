@@ -1,7 +1,9 @@
-import { AppProps } from 'app';
+import { ContextState } from 'app/context';
 
-export default () => ({userInfo}: AppProps) => {
+export default () => ({user}: ContextState) => {
+  const {update} = user.updateUser();
+  
   setTimeout(() => {
-    userInfo.updateUser(null);
+    update(null);
   }, 1000);
 }

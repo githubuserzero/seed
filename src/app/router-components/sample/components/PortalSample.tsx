@@ -1,27 +1,24 @@
-import { IntlStore } from 'common/data';
-import { inject, observer } from 'mobx-react';
+import { ContextState, withConsumer } from 'app/context';
 import * as React from 'react';
 
 export interface Props {
 
 }
 
-interface InternalProps {
-  intl: IntlStore;
+interface InternalProps extends ContextState {
 }
 
 interface State {
 }
 
-@inject('intl') @observer
-class Component extends React.Component<Props & InternalProps, State> {
+class Component extends React.PureComponent<Props & InternalProps, State> {
   static displayName: string = 'PortalSample';
   
   render() {
     return (
-      <div>{this.props.intl.language}</div>
+      <div>{this.props.message.language}</div>
     );
   }
 }
 
-export default Component as React.ComponentClass<Props>;
+export default withConsumer<Props & InternalProps>(Component) as React.ComponentClass<Props>;

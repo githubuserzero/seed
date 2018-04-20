@@ -11,8 +11,8 @@ interface InternalProps {
 interface State {
 }
 
-class Component extends React.Component<Props & InternalProps, State> {
-  static displayName: string = 'Component13224130';
+class Component extends React.PureComponent<Props & InternalProps, State> {
+  static displayName: string = 'app.router-components.main';
   
   render() {
     return (

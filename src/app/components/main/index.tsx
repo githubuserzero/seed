@@ -14,11 +14,11 @@ interface State {
 }
 
 class Component extends React.Component<Props & InternalProps, State> {
-  static displayName: string = 'Component57762622';
+  static displayName: string = 'app.components.main';
   
   render() {
     return (
-      <div>
+      <React.Fragment>
         <div>
           <LanguageChangeButton/>
           <SignButton/>
@@ -30,7 +30,7 @@ class Component extends React.Component<Props & InternalProps, State> {
           {this.props.children}
           {this.props.routerContents}
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

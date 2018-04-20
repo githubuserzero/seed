@@ -1,7 +1,5 @@
 import { login, logout } from 'app/actions';
-import { UserInfoStore } from 'app/data';
-import { Dispatch, dispatcher } from 'mobx-dispatcher';
-import { inject, observer } from 'mobx-react';
+import { ContextState, withConsumer } from 'app/context';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import * as styles from './SignButton.module.scss';
@@ -9,37 +7,36 @@ import * as styles from './SignButton.module.scss';
 export interface Props {
 }
 
-interface InternalProps extends InjectedIntlProps {
-  dispatch: Dispatch;
-  userInfo: UserInfoStore;
+interface InternalProps extends InjectedIntlProps, ContextState {
 }
 
 interface State {
 }
 
-@inject('userInfo') @dispatcher @observer
-class Component extends React.Component<Props & InternalProps, State> {
+class Component extends React.PureComponent<Props & InternalProps, State> {
   static displayName: string = 'SignButton';
   
   render() {
-    return this.props.userInfo.user
+    return this.props.user.user
       ? (
         <button className={styles.main}
                 onClick={() => this.props.dispatch(logout())}>
+          {this.props.user.inProgress ? '### ' : null}
           {this.props.intl.formatMessage({id: 'app.main.sign-button.logout'})}
           {' - '}
-          {this.props.userInfo.user.firstName}
+          {this.props.user.user.firstName}
           {' '}
-          {this.props.userInfo.user.lastName}
+          {this.props.user.user.lastName}
         </button>
       )
       : (
         <button className={styles.main}
                 onClick={() => this.props.dispatch(login())}>
+          {this.props.user.inProgress ? '### ' : null}
           {this.props.intl.formatMessage({id: 'app.main.sign-button.login'})}
         </button>
       );
   }
 }
 
-export default injectIntl<Props>(Component) as React.ComponentClass<Props>;
+export default injectIntl<Props>(withConsumer<Props & InternalProps>(Component)) as React.ComponentClass<Props>;

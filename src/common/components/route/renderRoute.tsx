@@ -8,24 +8,25 @@ interface Props {
 }
 
 interface State {
-  Component: ComponentClass;
+  Component: ComponentClass | null;
 }
 
-class Container extends React.Component<Props, State> {
+class Container extends React.PureComponent<Props, State> {
   state: State = {
     Component: null,
   };
+  
+  constructor(props: Props) {
+    super(props);
+    props.load.then(({default: Component}) => {
+      this.setState({Component});
+    });
+  }
   
   render() {
     return this.state.Component
       ? <this.state.Component {...this.props.props}/>
       : null;
-  }
-  
-  componentWillMount() {
-    this.props.load.then(({default: Component}) => {
-      this.setState({Component});
-    });
   }
 }
 

@@ -12,14 +12,16 @@ interface InternalProps {
 interface State {
 }
 
-class Component extends React.Component<Props & InternalProps, State> {
+class Component extends React.PureComponent<Props & InternalProps, State> {
   static displayName: string = 'RouterNavigation';
   
   render() {
-    return [
-      <Link to="/">Home</Link>,
-      <Link to="/sample">Sample</Link>,
-    ].map((comp, i) => React.cloneElement(comp, {key: 'router-nav-' + i}));
+    return (
+      <React.Fragment>
+        <Link to="/">Home</Link>
+        <Link to="/sample">Sample</Link>
+      </React.Fragment>
+    );
   }
 }
 

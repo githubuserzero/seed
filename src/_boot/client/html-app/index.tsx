@@ -1,33 +1,20 @@
-import { AppProps } from 'app';
-import { InitialStateStore, UserInfoStore } from 'app/data';
-import { intlStore } from 'common/data';
-import { Provider } from 'mobx-react';
+import { Props as AppProps, Provider } from 'app/context';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { App } from './components';
 
-class MobXProvider extends React.Component<{}, AppProps> {
+class AppProvider extends React.PureComponent<{}, AppProps> {
   render() {
     return (
-      <Provider userInfo={this.state.userInfo}
-                intl={this.state.intl}
-                initialState={this.state.initialState}>
+      <Provider initialState={null}>
         <App/>
       </Provider>
     );
   }
-  
-  componentWillMount() {
-    this.setState({
-      intl: intlStore,
-      userInfo: new UserInfoStore,
-      initialState: new InitialStateStore,
-    });
-  }
 }
 
 ReactDOM.render((
-  <MobXProvider/>
+  <AppProvider/>
 ), document.querySelector('#app'));
 
 

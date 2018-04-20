@@ -16,10 +16,12 @@ class Component extends React.Component<Props & InternalProps, State> {
   static displayName: string = 'RouterContents';
   
   render() {
-    return [
-      routerStore.getRoute('/'),
-      routerStore.getRoute('/sample'),
-    ].map((comp, i) => React.cloneElement(comp, {key: 'router-' + i}));
+    return (
+      <React.Fragment>
+        {routerStore.getRoute('/')}
+        {routerStore.getRoute('/sample')}
+      </React.Fragment>
+    );
   }
 }
 
