@@ -14,6 +14,7 @@ type ContextState = Recontext.ContextState<{
   message: message.Store;
 }>
 
+// @ts-ignore
 const {Provider: ReactProvider, Consumer} = React.createContext<ContextState>();
 
 class Provider extends Recontext.Provider<ContextState, Props> {
