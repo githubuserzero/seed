@@ -16,7 +16,6 @@ export default ({body, initialState}: TemplateParams) => `
     <div id="app">${body}</div>
   </body>
   
-  <script src="dll.js"></script>
   <script src="shared.js"></script>
   <script src="init.js"></script>
   <script src="app.js"></script>

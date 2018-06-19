@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "esnext",
     "target": "es5",
     "moduleResolution": "node",
     "jsx": "react",
@@ -10,6 +10,7 @@
     "allowJs": false,
     "downlevelIteration": true,
     "strictNullChecks": true,
+    "importHelpers": true,
     "lib": [
       "dom",
       "es2015",
