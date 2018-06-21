@@ -1,6 +1,6 @@
 {
   "name": "seed",
-  "version": "2018.3.0",
+  "version": "2018.3.1",
   "description": "{project-description}",
   "scripts": {
     "electron.dev.build": "ssenpack electron.dev.build",
@@ -49,7 +49,7 @@
     "js-cookie": "^2.2.0",
     "moment": "^2.22.2",
     "numeral": "^2.0.6",
-    "prop-types": "^15.6.1",
+    "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-intl": "^2.4.0",
@@ -71,7 +71,7 @@
     "@types/loader-utils": "^1.1.3",
     "@types/numeral": "^0.0.22",
     "@types/prop-types": "^15.5.3",
-    "@types/react": "^16.4.0",
+    "@types/react": "^16.4.1",
     "@types/react-dom": "^16.0.6",
     "@types/react-intl": "^2.3.8",
     "@types/react-router": "^4.0.26",
@@ -80,7 +80,7 @@
     "electron": "^2.0.2",
     "jest": "^23.1.0",
     "pre-commit": "^1.2.2",
-    "ssenpack": "^2018.3.0",
+    "ssenpack": "^2018.3.1",
     "ts-jest": "^22.4.6",
     "tslint": "^5.10.0",
     "typescript": "^2.9.2"
