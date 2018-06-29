@@ -1,10 +1,10 @@
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
 import * as express from 'express';
+import { DateTime } from 'luxon';
 import * as React from 'react';
-import * as config from '../../../config.json';
 import * as routers from 'server/routers';
-import * as moment from 'moment';
+import * as config from '../../../config.json';
 
 const app: express.Express = express();
 
@@ -18,5 +18,5 @@ app.use(routers.showcase);
 const port: number = process.env.PORT || config.server.port;
 
 app.listen(port, () => {
-  console.log(`SSR server started ${port} [${moment().format('HH:mm:ss')}]`);
+  console.log(`SSR server started ${port} [${DateTime.local().toFormat('HH:mm:ss')}]`);
 });
