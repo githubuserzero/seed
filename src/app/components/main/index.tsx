@@ -1,6 +1,6 @@
 import RouterNavigation from 'app/components/route/RouterNavigation';
 import * as React from 'react';
-import { LanguageChangeButton, SignButton } from './components';
+import { LanguageChangeButton, SignButton, TimezoneChangeSelect } from 'seed/components';
 import './index.scss';
 
 export interface Props {
@@ -22,6 +22,7 @@ class Component extends React.Component<Props & InternalProps, State> {
         <div>
           <LanguageChangeButton/>
           <SignButton/>
+          <TimezoneChangeSelect/>
         </div>
         <div>
           <RouterNavigation/>

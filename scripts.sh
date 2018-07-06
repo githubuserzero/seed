@@ -45,4 +45,7 @@ EOT
       end tell
 EOT
     ;;
+  download-resources)
+    curl -o "./src/timezone.json" "http://api.timezonedb.com/v2/list-time-zone?key=$TIMEZONEDB_KEY&format=json";
+    ;;
 esac

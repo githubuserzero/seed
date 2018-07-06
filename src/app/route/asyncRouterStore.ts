@@ -4,10 +4,10 @@ export default new AsyncRouterStore([
   {
     path: '/',
     exact: true,
-    component: () => import('app/router-components/main'),
+    component: () => import('seed/router-components/main'),
   },
   {
     path: '/sample',
-    component: () => import('app/router-components/sample'),
+    component: () => import('seed/router-components/sample'),
   },
 ]);

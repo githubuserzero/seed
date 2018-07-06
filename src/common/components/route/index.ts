@@ -1,1 +1,0 @@
-export { default as renderRoute } from './renderRoute';

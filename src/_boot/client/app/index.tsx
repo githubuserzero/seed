@@ -1,4 +1,5 @@
 import { Props as AppProps, Provider } from 'app/context';
+import { getInitialTimezone } from 'seed/data';
 import routerStore from 'app/route/asyncRouterStore';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
@@ -7,7 +8,8 @@ import { App } from './components';
 class AppProvider extends React.PureComponent<{}, AppProps> {
   render() {
     return (
-      <Provider initialState={window.__INITIAL_STATE__ || null}>
+      <Provider initialState={window.__INITIAL_STATE__ || null}
+                currentTimezone={getInitialTimezone()}>
         <App/>
       </Provider>
     );

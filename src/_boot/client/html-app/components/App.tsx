@@ -1,6 +1,7 @@
 import Main from 'app/components/main';
 import AsyncRouterContents from 'app/components/route/AsyncRouterContents';
 import { ContextState, withConsumer } from 'app/context';
+import { messages } from 'seed/data';
 import * as React from 'react';
 import { IntlProvider } from 'react-intl';
 import { HashRouter } from 'react-router-dom';
@@ -20,7 +21,7 @@ class Component extends React.PureComponent<Props & InternalProps, State> {
   
   render() {
     return (
-      <IntlProvider locale={this.props.message.language} messages={this.props.message.messages}>
+      <IntlProvider locale={this.props.language} messages={messages[this.props.language]}>
         <HashRouter>
           <Main routerContents={<AsyncRouterContents/>}/>
         </HashRouter>

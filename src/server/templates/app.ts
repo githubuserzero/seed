@@ -7,7 +7,7 @@ export default ({body, initialState}: TemplateParams) => `
     <meta charset=UTF-8>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="/"/>
-    <link rel="stylesheet" type="text/css" href="app.css?1"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
     <title>Title...</title>
     ${ typeof initialState === 'string' ? `<script>window.__INITIAL_STATE__=${initialState.replace(/</g, '\\u003c')}</script>` : '' }
   </head>

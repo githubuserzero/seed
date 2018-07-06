@@ -4,10 +4,10 @@ export default new SyncRouterStore([
   {
     path: '/',
     exact: true,
-    component: require('app/router-components/main').default,
+    component: require('seed/router-components/main').default,
   },
   {
     path: '/sample',
-    component: require('app/router-components/sample').default,
+    component: require('seed/router-components/sample').default,
   },
 ]);

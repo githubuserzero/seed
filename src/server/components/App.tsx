@@ -4,6 +4,7 @@ import { ContextState, withConsumer } from 'app/context';
 import * as React from 'react';
 import { IntlProvider } from 'react-intl';
 import { StaticRouter } from 'react-router-dom';
+import { messages } from 'seed/data';
 
 export interface Props {
   url: string;
@@ -20,7 +21,7 @@ class Component extends React.PureComponent<Props & InternalProps, State> {
   
   render() {
     return (
-      <IntlProvider locale={this.props.message.language} messages={this.props.message.messages}>
+      <IntlProvider locale={this.props.language} messages={messages[this.props.language]}>
         <StaticRouter location={this.props.url} context={{}}>
           <Main routerContents={<RouterContents/>}/>
         </StaticRouter>
