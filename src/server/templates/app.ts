@@ -18,6 +18,8 @@ export default ({body, initialState}: TemplateParams) => `
   
   <script src="vendor.js"></script>
   <script src="init.js"></script>
+  <script src="style.js"></script>
+  <!-- And if you use css themes you need require add their js files. -->
   <script src="app.js"></script>
 </html>
 `
