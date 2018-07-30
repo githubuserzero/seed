@@ -31,3 +31,7 @@ declare class System {
   static import(path: string): Promise<any>;
   // tslint:enable
 }
+
+// tslint:disable
+declare const hljs:any;
+// tslint:enable

@@ -8,6 +8,8 @@ export default ({body, initialState}: TemplateParams) => `
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base href="/"/>
     <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <title>Title...</title>
   </head>
   
