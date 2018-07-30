@@ -26,12 +26,6 @@ interface Window {
   // tslint:enable
 }
 
-declare class System {
-  // tslint:disable
-  static import(path: string): Promise<any>;
-  // tslint:enable
-}
-
 // tslint:disable
 declare const hljs:any;
 // tslint:enable
