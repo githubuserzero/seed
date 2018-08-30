@@ -1,5 +1,5 @@
 import { ContextState, withConsumer } from 'app/context';
-import { DateTime } from 'luxon';
+import * as moment from 'moment-timezone';
 import * as React from 'react';
 import { createPortal } from 'react-dom';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -34,7 +34,7 @@ class Component extends React.PureComponent<Props & InternalProps, State> {
   }
   
   render() {
-    const dateFormat: string = 'z - ff';
+    const dateFormat: string = 'LLLL';
     
     return (
       <div>
@@ -44,13 +44,13 @@ class Component extends React.PureComponent<Props & InternalProps, State> {
         <br/>
         <ul>
           <li>
-            Local: {DateTime.local().setLocale(this.props.language).toFormat(dateFormat)}
+            Local: {moment().locale(this.props.language).format(dateFormat)}
           </li>
           <li>
-            Current: {DateTime.local().setZone(this.props.timezone.zoneName).setLocale(this.props.language).toFormat(dateFormat)}
+            Current: {moment.tz(this.props.timezone.zoneName).locale(this.props.language).format(dateFormat)}
           </li>
           <li>
-            {DateTime.local().setZone('Asia/Singapore').setLocale(this.props.language).toFormat(dateFormat)}
+            {moment.tz('Asia/Singapore').locale(this.props.language).format(dateFormat)}
           </li>
         </ul>
         <br/>
@@ -72,4 +72,4 @@ class Component extends React.PureComponent<Props & InternalProps, State> {
   };
 }
 
-export default injectIntl<Props>(withConsumer<Props & InternalProps>(Component)) as React.ComponentClass<Props>;
+export default injectIntl(withConsumer<Props & InternalProps>(Component)) as React.ComponentClass<Props>;

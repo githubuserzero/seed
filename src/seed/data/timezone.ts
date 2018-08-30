@@ -1,7 +1,7 @@
-import { get, set } from 'js-cookie';
-import { DateTime } from 'luxon';
-import * as timezonedb from '../../timezone.json';
 import { cookieKeys } from 'app/data';
+import { get, set } from 'js-cookie';
+import * as moment from 'moment-timezone';
+import * as timezonedb from '../../timezone.json';
 
 export interface Timezone {
   countryCode: string;
@@ -30,7 +30,7 @@ export function getInitialTimezone(): string {
   if (typeof timezone === 'string') {
     return timezone;
   } else {
-    const timezone: string = DateTime.local().zoneName;
+    const timezone: string = moment.tz.guess();
     set(cookieKeys.timezone, timezone);
     return timezone;
   }
