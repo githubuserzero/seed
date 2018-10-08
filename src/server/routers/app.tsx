@@ -3,7 +3,8 @@ import { cookieKeys } from 'app/data';
 import * as express from 'express';
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
-import { InitialState, Language, User } from 'seed/data';
+import { Language } from 'seed/data';
+import { User, InitialState } from 'app/data';
 import * as templates from 'server/templates';
 import { App } from '../components';
 

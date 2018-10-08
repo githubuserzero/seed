@@ -1,6 +1,7 @@
 import RouterNavigation from 'app/components/route/RouterNavigation';
 import * as React from 'react';
-import { LanguageChangeButton, SignButton, TimezoneChangeSelect } from 'seed/components';
+import { LanguageChangeButton, TimezoneChangeSelect } from 'seed/components';
+import { SignButton } from 'app/components/user';
 import './index.scss';
 
 export interface Props {

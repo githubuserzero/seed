@@ -1,7 +1,7 @@
 import { ContextState, withConsumer } from 'app/context';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { login, logout } from 'seed/actions';
+import { login, logout } from 'app/actions';
 import * as styles from './SignButton.module.scss';
 
 export interface Props {

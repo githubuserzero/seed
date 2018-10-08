@@ -1,4 +1,4 @@
-import { InitialState } from 'seed/data';
+import { InitialState } from './initialState';
 import produce from 'immer';
 
 export interface User {

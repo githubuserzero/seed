@@ -1,23 +1,19 @@
-import { cookieKeys } from 'app/data';
-import * as Cookie from 'js-cookie';
-import * as React from 'react';
-import * as Recontext from 'recontext';
 import {
   abortLogin,
   abortLogout,
+  cookieKeys,
   createUserStore,
-  getTimezone,
   InitialState,
-  Language,
   startLogin,
   startLogout,
-  Timezone,
-  updateLanguage,
-  updateTimezone,
   updateUser,
   User,
   UserStore,
-} from 'seed/data';
+} from 'app/data';
+import * as Cookie from 'js-cookie';
+import * as React from 'react';
+import * as Recontext from 'recontext';
+import { getTimezone, Language, Timezone, updateLanguage, updateTimezone } from 'seed/data';
 
 interface Props {
   initialState: InitialState | null;
