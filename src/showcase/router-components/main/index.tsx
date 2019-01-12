@@ -1,24 +1,10 @@
-import * as React from 'react';
+import React from 'react';
 
-export interface Props {
-
+// tslint:disable:no-default-export
+export default function () {
+  return (
+    <div>
+      Showcase Main
+    </div>
+  );
 }
-
-interface InternalProps {
-
-}
-
-interface State {
-}
-
-class Component extends React.PureComponent<Props & InternalProps, State> {
-  static displayName: string = 'Component30834512';
-  
-  render() {
-    return (
-      <div>Showcase Main</div>
-    );
-  }
-}
-
-export default Component as React.ComponentClass<Props>;

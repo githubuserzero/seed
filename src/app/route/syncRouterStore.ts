@@ -1,13 +1,13 @@
-import { SyncRouterStore } from 'ssenkit.router-store';
+import { SyncRouterStore } from 'router-store';
 
-export default new SyncRouterStore([
+export const syncRouterStore: SyncRouterStore = new SyncRouterStore([
   {
     path: '/',
     exact: true,
-    component: require('seed/router-components/main').default,
+    component: require('../route-components/main').default,
   },
   {
     path: '/sample',
-    component: require('seed/router-components/sample').default,
+    component: require('../route-components/sample').default,
   },
 ]);

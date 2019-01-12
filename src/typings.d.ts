@@ -1,10 +1,8 @@
-declare module '!!sass-variable-loader!*.scss' {
-  const content: {};
-  export = content;
-}
+/// <reference path="react"/>
 
-declare module '*.scss' {
-  const content: {[className: string]: string};
+// tslint:disable:no-any
+declare module '*.ejs' {
+  const content: string;
   export = content;
 }
 
@@ -13,19 +11,29 @@ declare module '*.css' {
   export = content;
 }
 
+declare module '*.scss' {
+  const content: {[className: string]: string};
+  export = content;
+}
+
+declare module '*.less' {
+  const content: {[className: string]: string};
+  export = content;
+}
+
 declare module '*.json' {
-  // tslint:disable
   const content: any;
-  // tslint:enable
+  export = content;
+}
+
+declare module '*.svg' {
+  const content: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   export = content;
 }
 
 interface Window {
-  // tslint:disable
   __INITIAL_STATE__: any;
-  // tslint:enable
 }
 
-// tslint:disable
-declare const hljs:any;
-// tslint:enable
+// highlight.js
+declare const hljs: any;

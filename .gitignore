@@ -10,3 +10,5 @@
 
 /tsconfig.lib.*.json
 /webpack.lib.*.js
+
+/package-lock.json

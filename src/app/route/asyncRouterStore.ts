@@ -1,13 +1,13 @@
-import { AsyncRouterStore } from 'ssenkit.router-store';
+import { AsyncRouterStore } from 'router-store';
 
-export default new AsyncRouterStore([
+export const asyncRouterStore: AsyncRouterStore = new AsyncRouterStore([
   {
     path: '/',
     exact: true,
-    component: () => import('seed/router-components/main'),
+    component: () => import('../route-components/main'),
   },
   {
     path: '/sample',
-    component: () => import('seed/router-components/sample'),
+    component: () => import('../route-components/sample'),
   },
 ]);

@@ -1,0 +1,19 @@
+{
+  "name": "use-react-intl",
+  "version": "1.0.0",
+  "description": "react-intl wrapper for React 16.8",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iamssen/ssenkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iamssen/ssenkit/issues"
+  },
+  "homepage": "https://github.com/iamssen/ssenkit",
+  "main": "index.js",
+  "typings": "index.d.ts",
+  "dependencies": {
+    "react": ">=16.8",
+    "react-intl": ">= 2.7"
+  }
+}

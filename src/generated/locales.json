@@ -1,0 +1,10 @@
+{
+  "en-US": {
+    "app.sample.text1": "Sample Content",
+    "app.sample.text2": "Test Text"
+  },
+  "ko-KR": {
+    "app.sample.text1": "샘플 컨텐츠",
+    "app.sample.text2": "테스트 문자열"
+  }
+}

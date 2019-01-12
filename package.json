@@ -1,31 +1,62 @@
 {
   "name": "seed",
-  "version": "2018.4.0",
+  "version": "2019.1.0",
   "description": "{project-description}",
   "scripts": {
-    "electron.dev.build": "ssenpack electron.dev.build",
-    "electron.dev.build.watch": "ssenpack electron.dev.build.watch",
-    "electron.dev.start": "electron index.electron.js",
-    "libs.build": "ssenpack libs.build",
-    "libs.publish": "sh scripts.sh libs.publish",
-    "messages.build": "ssenpack messages.build",
-    "web.build": "ssenpack web.build",
-    "web.dev.build": "ssenpack web.dev.build",
-    "web.dev.start": "ssenpack web.dev.start",
-    "web.server.build": "ssenpack web.server.build",
-    "web.server.dev.build": "ssenpack web.server.dev.build",
-    "web.server.dev.build.watch": "ssenpack web.server.dev.build.watch",
-    "web.server.dev.start": "ssenpack web.server.dev.start",
-    "build": "npm run messages.build && npm run web.build && npm run web.server.build && npm run libs.build",
-    "start": "npm run messages.build && sh scripts.sh start",
-    "start-electron": "npm run messages.build && sh scripts.sh start-electron",
+    "libs.build": "zeroconfig libs.build",
+    "libs.publish": "zeroconfig libs.publish",
+    "web.build": "zeroconfig web.build",
+    "web.dev.build": "zeroconfig web.dev.build",
+    "web.dev.build.watch": "zeroconfig web.dev.build.watch",
+    "web.dev.start": "zeroconfig web.dev.start",
+    "web.ssr.build": "zeroconfig web.ssr.build",
+    "web.ssr.dev.build": "zeroconfig web.ssr.dev.build",
+    "web.ssr.dev.build.watch": "zeroconfig web.ssr.dev.build.watch",
+    "web.ssr.dev.start": "zeroconfig web.ssr.dev.start",
+    "translation.build": "zeroconfig intl.build",
+    "translation.build.watch": "zeroconfig intl.build.watch",
+    "translation.distribute": "zeroconfig intl.distribute",
+    "template.build": "zeroconfig template.build",
+    "resource.download": "node ./resource.download",
+    "generate": "npm run resource.download && npm run translation.build && npm run template.build",
+    "build": "npm run generate && npm run web.build && npm run web.ssr.build && npm run libs.build",
+    "start": "npm run generate && hyperlayout development",
+    "start-translation": "npm run generate && hyperlayout translation",
     "test": "jest",
     "coverage": "jest --coverage",
-    "web.git.publish": "git subtree push --prefix dist/web origin subtree/web",
-    "web.server.git.publish": "git subtree push --prefix dist/server origin subtree/server",
-    "git.publish": "npm run web.git.publish && npm run web.server.git.publish",
-    "lint": "tslint 'src/**/!(*.spec|*.test).ts?(x)'",
-    "download-resources": "sh scripts.sh download-resources"
+    "lint": "tslint \"src/**/!(*.spec|*.test).ts?(x)\"",
+    "git.publish.web": "git subtree push --prefix dist/web origin dist/web",
+    "git.publish.ssr": "git subtree push --prefix dist/ssr origin dist/ssr",
+    "git.publish.ghpages": "git subtree push --prefix dist/web origin gh-pages",
+    "git.publish": "npm run git.publish.web && npm run git.publish.ssr && npm run git.publish.ghpages",
+    "postinstall": "typesync"
+  },
+  "hyperlayout": {
+    "development": [
+      [
+        [
+          [
+            "npm run web.ssr.dev.build.watch",
+            "npm run web.ssr.dev.start"
+          ],
+          "npm run web.dev.start"
+        ]
+      ]
+    ],
+    "translation": [
+      [
+        [
+          [
+            "npm run web.ssr.dev.build.watch",
+            "npm run web.ssr.dev.start"
+          ],
+          [
+            "npm run web.dev.start",
+            "npm run translation.build.watch"
+          ]
+        ]
+      ]
+    ]
   },
   "license": "MIT",
   "repository": {
@@ -43,22 +74,27 @@
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "d3-array": "^2.0.2",
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
-    "immer": "^1.9.3",
+    "history": "^4.7.2",
+    "immer": "^1.10.2",
     "js-cookie": "^2.2.0",
     "moment": "^2.23.0",
     "moment-timezone": "^0.5.23",
+    "node-fetch": "^2.3.0",
     "numeral": "^2.0.6",
     "prop-types": "^15.6.2",
-    "react": "^16.7.0",
+    "react": "^16.8.0-alpha.0",
     "react-app-polyfill": "^0.2.0",
-    "react-dom": "^16.7.0",
+    "react-dom": "^16.8.0-alpha.0",
     "react-intl": "^2.7.2",
-    "react-router": "^4.3.1",
-    "react-router-dom": "^4.3.1",
+    "react-router": "^4.4.0-beta.6",
+    "react-router-dom": "^4.4.0-beta.6",
+    "react-zeroconfig": "^1.1.0",
     "recontext": "^1.0.0",
-    "ssenkit.router-store": "^2.0.0",
-    "url-search-params-polyfill": "^5.0.0"
+    "tslint-ssen-rules": "^1.0.0",
+    "url-search-params-polyfill": "^5.0.0",
+    "use-react-router": "^1.0.3"
   },
   "devDependencies": {
     "@types/body-parser": "^1.17.0",
@@ -66,26 +102,29 @@
     "@types/cookie-parser": "^1.4.1",
     "@types/core-js": "^2.5.0",
     "@types/d3-array": "^1.2.4",
+    "@types/ejs": "^2.6.1",
     "@types/express": "^4.16.0",
-    "@types/jest": "^23.3.10",
+    "@types/history": "^4.7.2",
+    "@types/jest": "^23.3.12",
     "@types/js-cookie": "^2.2.0",
     "@types/loader-utils": "^1.1.3",
+    "@types/mkdirp": "^0.5.2",
     "@types/moment-timezone": "^0.5.9",
+    "@types/node-fetch": "^2.1.4",
     "@types/numeral": "0.0.25",
     "@types/prop-types": "^15.5.8",
     "@types/react": "^16.7.18",
     "@types/react-dom": "^16.0.11",
-    "@types/react-intl": "^2.3.14",
+    "@types/react-intl": "^2.3.15",
     "@types/react-router": "^4.4.3",
     "@types/react-router-dom": "^4.3.1",
     "@types/webpack-env": "^1.13.6",
-    "electron": "^4.0.0",
+    "hyperlayout": "^0.2.1",
     "jest": "^23.6.0",
+    "mkdirp": "^0.5.1",
     "pre-commit": "^1.2.2",
-    "ssenpack": "^2018.4.6",
-    "ssenpack.tslint-rules": "0.0.1",
     "ts-jest": "^23.10.5",
-    "tslint": "^5.12.0",
+    "tslint": "^5.12.1",
     "typescript": "^3.2.2"
   },
   "pre-commit": [
@@ -93,7 +132,7 @@
   ],
   "jest": {
     "transform": {
-      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      ".(ts|tsx)": "ts-jest"
     },
     "testMatch": [
       "**/__tests__/**/*.ts?(x)",
@@ -106,8 +145,8 @@
     ],
     "moduleDirectories": [
       "node_modules",
-      "src",
-      "src/_library"
+      "src/_modules",
+      "src"
     ],
     "coverageDirectory": "coverage"
   }

@@ -1,106 +1,58 @@
-import {
-  abortLogin,
-  abortLogout,
-  cookieKeys,
-  createUserStore,
-  InitialState,
-  startLogin,
-  startLogout,
-  updateUser,
-  User,
-  UserStore,
-} from 'app/data';
-import * as Cookie from 'js-cookie';
-import * as React from 'react';
-import * as Recontext from 'recontext';
-import { getTimezone, Language, Timezone, updateLanguage, updateTimezone } from 'seed/data';
+import messages from 'generated/locales.json';
+import React, { useContext } from 'react';
+import { addLocaleData } from 'react-intl';
+import en from 'react-intl/locale-data/en';
+import ko from 'react-intl/locale-data/ko';
+import { IntlProvider } from 'use-react-intl';
+import { useInitialState } from './context-states/useInitialState';
+import { useLocale } from './context-states/useLocale';
+import { useTimezone } from './context-states/useTimezone';
+import { InitialState } from './data-types/initialState';
+import { LanguageCode } from './data-types/locale';
+import { Timezone } from './data-types/timezone';
 
-interface Props {
+addLocaleData(en);
+addLocaleData(ko);
+
+export interface Props {
   initialState: InitialState | null;
   currentTimezone: string;
+  currentLocale: LanguageCode;
+  children: React.ReactNode;
 }
 
-type ContextState = Recontext.ContextState<{
-  user: UserStore;
+export interface AppContextState {
   initialState: InitialState | null;
-  language: Language,
+  locale: LanguageCode;
   timezone: Timezone;
   
-  cleanInitialState: () => void;
+  updateLocale: (languageCode: LanguageCode) => void;
   updateTimezone: (timezone: string | Timezone) => void;
-  updateLanguage: (language: Language) => void;
-  startLogin: () => void;
-  startLogout: () => void;
-  abortLogin: () => void;
-  abortLogout: () => void;
-  updateUser: (user: User | null) => void;
-}>
+}
 
 // @ts-ignore
-const {Provider: ReactProvider, Consumer} = React.createContext<ContextState>();
+const AppContext: React.Context<AppContextState> = React.createContext<AppContextState>();
 
-class Provider extends Recontext.Provider<ContextState, Props> {
-  constructor(props: Props) {
-    super(props);
-    
-    this.state = {
-      contextState: {
-        // tools
-        dispatch: this.dispatch,
-        subscribe: this.subscribe,
-        
-        // states
-        initialState: props.initialState,
-        user: createUserStore(props.initialState),
-        language: props.initialState
-          ? props.initialState.language
-          : Cookie.get(cookieKeys.locale) as Language || 'en',
-        timezone: getTimezone(this.props.currentTimezone),
-        
-        // actions
-        cleanInitialState: () => {
-          this.setContextState({
-            initialState: null,
-          });
-        },
-        updateTimezone: this.bindReducer()(updateTimezone)(timezone => ({timezone})),
-        updateLanguage: this.bindReducer()(updateLanguage)(language => ({language})),
-        updateUser: this.bindReducer(({user}) => user)(updateUser)(user => ({user})),
-        startLogin: this.bindReducer(({user}) => user)(startLogin)(user => ({user})),
-        startLogout: this.bindReducer(({user}) => user)(startLogout)(user => ({user})),
-        abortLogin: this.bindReducer(({user}) => user)(abortLogin)(user => ({user})),
-        abortLogout: this.bindReducer(({user}) => user)(abortLogout)(user => ({user})),
-      },
-    };
-  }
+export function AppContextProvider({initialState: defaultInitialState, children, currentLocale, currentTimezone}: Props) {
+  const {locale, updateLocale} = useLocale(currentLocale);
+  const {timezone, updateTimezone} = useTimezone(currentTimezone);
+  const {initialState} = useInitialState(defaultInitialState);
   
-  render() {
-    return (
-      <ReactProvider value={this.state.contextState}>
-        {this.props.children}
-      </ReactProvider>
-    );
-  }
+  return (
+    <IntlProvider locale={locale.slice(0, 2)} messages={messages[locale]}>
+      <AppContext.Provider value={{
+        initialState,
+        locale,
+        timezone,
+        updateLocale,
+        updateTimezone,
+      }}>
+        {children}
+      </AppContext.Provider>
+    </IntlProvider>
+  );
 }
 
-function withConsumer<Props>(Component: React.ComponentType<Props>): React.ComponentType<ContextState & Props> {
-  return class extends React.PureComponent<ContextState & Props, {}> {
-    render() {
-      return (
-        <Consumer>
-          {
-            state => <Component {...state} {...this.props}/>
-          }
-        </Consumer>
-      );
-    }
-  };
+export function useAppContextState(): AppContextState {
+  return useContext(AppContext);
 }
-
-export {
-  Provider,
-  Consumer,
-  withConsumer,
-  ContextState,
-  Props,
-};
