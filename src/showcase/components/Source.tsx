@@ -1,11 +1,11 @@
 import React, { createRef, RefObject, useEffect } from 'react';
 import styles from './Source.module.scss';
 
-export interface Props {
+export interface SourceProps {
   source: string;
 }
 
-export function Source({source}: Props) {
+export function Source({source}: SourceProps) {
   const container: RefObject<HTMLPreElement> = createRef();
   
   useEffect(() => {

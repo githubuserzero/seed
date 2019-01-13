@@ -5,11 +5,11 @@ import { RouterContents } from './components/RouterContents';
 import { RouterNavigation } from './components/RouterNavigation';
 import { TimezoneChangeSelect } from './components/TimezoneChangeSelect';
 
-export interface Props {
+export interface AppProps {
   routerStore: RouterStore;
 }
 
-export function App({routerStore}: Props) {
+export function App({routerStore}: AppProps) {
   return (
     <React.Fragment>
       <div>

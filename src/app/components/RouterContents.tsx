@@ -1,11 +1,11 @@
 import React from 'react';
 import { RouterStore } from 'router-store';
 
-export interface Props {
+export interface RouterContentsProps {
   routerStore: RouterStore;
 }
 
-export function RouterContents({routerStore}: Props) {
+export function RouterContents({routerStore}: RouterContentsProps) {
   return (
     <React.Fragment>
       {routerStore.getRoute('/')}

@@ -14,7 +14,7 @@ import { Timezone } from './data-types/timezone';
 addLocaleData(en);
 addLocaleData(ko);
 
-export interface Props {
+export interface AppContextProps {
   initialState: InitialState | null;
   currentTimezone: string;
   currentLocale: LanguageCode;
@@ -33,7 +33,7 @@ export interface AppContextState {
 // @ts-ignore
 const AppContext: React.Context<AppContextState> = React.createContext<AppContextState>();
 
-export function AppContextProvider({initialState: defaultInitialState, children, currentLocale, currentTimezone}: Props) {
+export function AppContextProvider({initialState: defaultInitialState, children, currentLocale, currentTimezone}: AppContextProps) {
   const {locale, updateLocale} = useLocale(currentLocale);
   const {timezone, updateTimezone} = useTimezone(currentTimezone);
   const {initialState} = useInitialState(defaultInitialState);

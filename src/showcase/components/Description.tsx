@@ -1,10 +1,10 @@
 import React, { createRef, RefObject, useEffect } from 'react';
 
-export interface Props {
+export interface DescriptionProps {
   html: string;
 }
 
-export function Description({html}: Props) {
+export function Description({html}: DescriptionProps) {
   const container: RefObject<HTMLDivElement> = createRef();
   
   useEffect(() => {
