@@ -20,8 +20,8 @@
     "resource.download": "node ./resource.download",
     "generate": "npm run resource.download && npm run translation.build && npm run template.build",
     "build": "npm run generate && npm run web.build && npm run web.ssr.build && npm run module.build",
-    "start": "npm run generate && hyperlayout development",
-    "start-translation": "npm run generate && hyperlayout translation",
+    "start": "npm run generate && multiplerun development",
+    "start-translation": "npm run generate && multiplerun translation",
     "test": "jest",
     "coverage": "jest --coverage",
     "lint": "tslint \"src/**/!(*.spec|*.test).ts?(x)\"",
@@ -31,30 +31,22 @@
     "git.publish": "npm run git.publish.web && npm run git.publish.ssr && npm run git.publish.ghpages",
     "postinstall": "typesync"
   },
-  "hyperlayout": {
+  "multiplerun": {
     "development": [
       [
-        [
-          [
-            "npm run web.ssr.dev.build.watch",
-            "npm run web.ssr.dev.start"
-          ],
-          "npm run web.dev.start"
-        ]
-      ]
+        "npm run web.ssr.dev.build.watch",
+        "npm run web.ssr.dev.start"
+      ],
+      "npm run web.dev.start"
     ],
     "translation": [
       [
-        [
-          [
-            "npm run web.ssr.dev.build.watch",
-            "npm run web.ssr.dev.start"
-          ],
-          [
-            "npm run web.dev.start",
-            "npm run translation.build.watch"
-          ]
-        ]
+        "npm run web.ssr.dev.build.watch",
+        "npm run web.ssr.dev.start"
+      ],
+      [
+        "npm run web.dev.start",
+        "npm run translation.build.watch"
       ]
     ]
   },
@@ -102,7 +94,7 @@
     "@types/ejs": "^2.6.1",
     "@types/express": "^4.16.0",
     "@types/history": "^4.7.2",
-    "@types/jest": "^23.3.12",
+    "@types/jest": "^23.3.13",
     "@types/js-cookie": "^2.2.0",
     "@types/loader-utils": "^1.1.3",
     "@types/mkdirp": "^0.5.2",
@@ -116,15 +108,15 @@
     "@types/react-router": "^4.4.3",
     "@types/react-router-dom": "^4.3.1",
     "@types/webpack-env": "^1.13.6",
-    "hyperlayout": "^0.2.1",
     "jest": "^23.6.0",
     "mkdirp": "^0.5.1",
+    "multiplerun": "^0.1.4",
     "pre-commit": "^1.2.2",
-    "react-zeroconfig": "^1.1.4",
+    "react-zeroconfig": "^1.1.5",
     "ts-jest": "^23.10.5",
     "tslint": "^5.12.1",
     "tslint-ssen-rules": "^1.0.0",
-    "typescript": "^3.2.2"
+    "typescript": "^3.2.4"
   },
   "pre-commit": [
     "lint"
