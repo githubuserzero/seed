@@ -5,18 +5,18 @@ import { getBrowserTimezone } from 'app/data-types/timezone';
 import { asyncRouterStore } from 'app/route/asyncRouterStore';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import '../polyfills';
 
 function AppProvider() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AppContextProvider initialState={null}
                           currentLocale={getBrowserLocale()}
                           currentTimezone={getBrowserTimezone()}>
         <App routerStore={asyncRouterStore}/>
       </AppContextProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
