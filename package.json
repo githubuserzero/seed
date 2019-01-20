@@ -28,8 +28,7 @@
     "git.publish.web": "git subtree push --prefix dist/web origin dist/web",
     "git.publish.ssr": "git subtree push --prefix dist/ssr origin dist/ssr",
     "git.publish.ghpages": "git subtree push --prefix dist/web origin gh-pages",
-    "git.publish": "npm run git.publish.web && npm run git.publish.ssr && npm run git.publish.ghpages",
-    "postinstall": "typesync"
+    "git.publish": "npm run git.publish.web && npm run git.publish.ssr && npm run git.publish.ghpages"
   },
   "multiplerun": {
     "development": [
@@ -112,7 +111,7 @@
     "mkdirp": "^0.5.1",
     "multiplerun": "^0.1.4",
     "pre-commit": "^1.2.2",
-    "react-zeroconfig": "^1.2.0",
+    "react-zeroconfig": "^1.2.2",
     "ts-jest": "^23.10.5",
     "tslint": "^5.12.1",
     "tslint-ssen-rules": "^1.0.0",
