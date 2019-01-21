@@ -111,7 +111,7 @@
     "mkdirp": "^0.5.1",
     "multiplerun": "^0.1.4",
     "pre-commit": "^1.2.2",
-    "react-zeroconfig": "^1.2.2",
+    "react-zeroconfig": "^1.2.3",
     "ts-jest": "^23.10.5",
     "tslint": "^5.12.1",
     "tslint-ssen-rules": "^1.0.0",
