@@ -3,7 +3,7 @@ import { AppContextProvider } from 'app/context';
 import { cookieKeys } from 'app/data-types/cookie';
 import { InitialState } from 'app/data-types/initialState';
 import { LanguageCode } from 'app/data-types/locale';
-import { syncRouterStore } from 'app/route/syncRouterStore';
+import { syncRouteStore } from 'app/route/syncRouteStore';
 import { render } from 'ejs';
 import { Request } from 'express';
 import React from 'react';
@@ -25,7 +25,7 @@ export function renderApp(req: Request, contentsState: Partial<InitialState>): s
       <AppContextProvider initialState={initialState}
                           currentLocale={locale}
                           currentTimezone={timezone}>
-        <App routerStore={syncRouterStore}/>
+        <App routeStore={syncRouteStore}/>
       </AppContextProvider>
     </StaticRouter>
   ));

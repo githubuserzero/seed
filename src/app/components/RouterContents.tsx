@@ -1,15 +1,14 @@
-import React from 'react';
-import { RouterStore } from 'router-store';
+import React, { Fragment } from 'react';
+import { RouteStore } from 'react-router-store';
 
 export interface RouterContentsProps {
-  routerStore: RouterStore;
+  routeStore: RouteStore;
 }
 
-export function RouterContents({routerStore}: RouterContentsProps) {
+export function RouterContents({ routeStore }: RouterContentsProps) {
   return (
-    <React.Fragment>
-      {routerStore.getRoute('/')}
-      {routerStore.getRoute('/sample')}
-    </React.Fragment>
+    <Fragment>
+      {routeStore.getAllRoutes()}
+    </Fragment>
   );
 }

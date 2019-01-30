@@ -1,6 +1,5 @@
 import React from 'react';
-import { Description } from 'showcase/components/Description';
-import { Source } from 'showcase/components/Source';
+import { Markdown, CodeBlock } from 'react-devdoc';
 import { Sample } from './Sample';
 
 // tslint:disable:no-default-export
@@ -8,9 +7,9 @@ export default function () {
   return (
     <div>
       <div>
-        <Description html={require('./Sample.description.md')}/>
+        <Markdown text={require('./Sample.description.md')}/>
         <Sample/>
-        <Source source={require('!!raw-loader!./Sample')}/>
+        <CodeBlock value={require('!!raw-loader!./Sample')} language="typescript jsx"/>
       </div>
     </div>
   );

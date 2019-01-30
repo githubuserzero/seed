@@ -1,15 +1,15 @@
 import messages from 'generated/locales.json';
-import React, { useContext } from 'react';
+import React, { Context, createContext, ReactNode, useContext } from 'react';
 import { addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import ko from 'react-intl/locale-data/ko';
 import { IntlProvider } from 'use-react-intl';
+import { Timezone, useTimezone } from 'use-timezone';
 import { useInitialState } from './context-states/useInitialState';
 import { useLocale } from './context-states/useLocale';
-import { useTimezone } from './context-states/useTimezone';
+import { cookieKeys } from './data-types/cookie';
 import { InitialState } from './data-types/initialState';
 import { LanguageCode } from './data-types/locale';
-import { Timezone } from './data-types/timezone';
 
 addLocaleData(en);
 addLocaleData(ko);
@@ -18,7 +18,7 @@ export interface AppContextProps {
   initialState: InitialState | null;
   currentTimezone: string;
   currentLocale: LanguageCode;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export interface AppContextState {
@@ -31,12 +31,12 @@ export interface AppContextState {
 }
 
 // @ts-ignore
-const AppContext: React.Context<AppContextState> = React.createContext<AppContextState>();
+const AppContext: Context<AppContextState> = createContext<AppContextState>();
 
-export function AppContextProvider({initialState: defaultInitialState, children, currentLocale, currentTimezone}: AppContextProps) {
-  const {locale, updateLocale} = useLocale(currentLocale);
-  const {timezone, updateTimezone} = useTimezone(currentTimezone);
-  const {initialState} = useInitialState(defaultInitialState);
+export function AppContextProvider({ initialState: defaultInitialState, children, currentLocale, currentTimezone }: AppContextProps) {
+  const { locale, updateLocale } = useLocale(currentLocale);
+  const { timezone, updateTimezone } = useTimezone(currentTimezone, cookieKeys.timezone);
+  const { initialState } = useInitialState(defaultInitialState);
   
   return (
     <IntlProvider locale={locale.slice(0, 2)} messages={messages[locale]}>

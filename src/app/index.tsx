@@ -1,17 +1,17 @@
-import React from 'react';
-import { RouterStore } from 'router-store';
+import React, { Fragment } from 'react';
+import { RouteStore } from 'react-router-store';
 import { LanguageChangeButton } from './components/LanguageChangeButton';
 import { RouterContents } from './components/RouterContents';
 import { RouterNavigation } from './components/RouterNavigation';
 import { TimezoneChangeSelect } from './components/TimezoneChangeSelect';
 
 export interface AppProps {
-  routerStore: RouterStore;
+  routeStore: RouteStore;
 }
 
-export function App({routerStore}: AppProps) {
+export function App({ routeStore }: AppProps) {
   return (
-    <React.Fragment>
+    <Fragment>
       <div>
         <LanguageChangeButton/>
         <TimezoneChangeSelect/>
@@ -20,8 +20,8 @@ export function App({routerStore}: AppProps) {
         <RouterNavigation/>
       </div>
       <div>
-        <RouterContents routerStore={routerStore}/>
+        <RouterContents routeStore={routeStore}/>
       </div>
-    </React.Fragment>
+    </Fragment>
   );
 }

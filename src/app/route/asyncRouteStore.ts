@@ -1,6 +1,6 @@
-import { AsyncRouterStore } from 'router-store';
+import { AsyncRouteStore, RouteStore } from 'react-router-store';
 
-export const asyncRouterStore: AsyncRouterStore = new AsyncRouterStore([
+export const asyncRouteStore: RouteStore = new AsyncRouteStore([
   {
     path: '/',
     exact: true,

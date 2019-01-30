@@ -1,6 +1,6 @@
-import { SyncRouterStore } from 'router-store';
+import { RouteStore, SyncRouteStore } from 'react-router-store';
 
-export const syncRouterStore: SyncRouterStore = new SyncRouterStore([
+export const syncRouteStore: RouteStore = new SyncRouteStore([
   {
     path: '/',
     exact: true,

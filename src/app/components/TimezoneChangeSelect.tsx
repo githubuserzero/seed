@@ -1,13 +1,13 @@
 import React, { ChangeEvent, useState } from 'react';
+import { timezoneList, timezoneMap } from 'use-timezone';
 import { useAppContextState } from '../context';
-import { timezoneList, timezoneMap } from '../data-types/timezone';
 import styles from './TimezoneChangeSelect.module.scss';
 
 export function TimezoneChangeSelect() {
-  const {timezone, updateTimezone} = useAppContextState();
+  const { timezone, updateTimezone } = useAppContextState();
   const [zoneName, updateZoneName] = useState<string>(timezone.zoneName);
   
-  function onChange(event: ChangeEvent<{value: string}>) {
+  function onChange(event: ChangeEvent<{ value: string }>) {
     const nextZoneName: string = event.target.value;
     
     updateZoneName(nextZoneName);

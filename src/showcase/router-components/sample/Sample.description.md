@@ -4,14 +4,12 @@
 - sample
 - sample
 
-```
-import React from 'react';
+```typescript jsx
+import React, { Component } from 'react';
 
-export default class extends React.Component {
-  render() {
-    return (
-      <div>Hello?</div>
-    );
-  }
+export function Component() {
+  return (
+    <div>Hello?</div>
+  );
 } 
 ```

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 export function RouterNavigation() {
   return (
-    <React.Fragment>
+    <Fragment>
       <Link to="/">Home</Link>
       <Link to="/sample">Sample</Link>
-    </React.Fragment>
+    </Fragment>
   );
 }
