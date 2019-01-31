@@ -1,5 +1,5 @@
 import messages from 'generated/locales.json';
-import React, { Context, createContext, ReactNode, useContext } from 'react';
+import React, { Consumer, Context, createContext, ReactNode, useContext } from 'react';
 import { addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import ko from 'react-intl/locale-data/ko';
@@ -34,9 +34,9 @@ export interface AppContextState {
 const AppContext: Context<AppContextState> = createContext<AppContextState>();
 
 export function AppContextProvider({ initialState: defaultInitialState, children, currentLocale, currentTimezone }: AppContextProps) {
-  const { locale, updateLocale } = useLocale(currentLocale);
-  const { timezone, updateTimezone } = useTimezone(currentTimezone, cookieKeys.timezone);
-  const { initialState } = useInitialState(defaultInitialState);
+  const {locale, updateLocale} = useLocale(currentLocale);
+  const {timezone, updateTimezone} = useTimezone(currentTimezone, cookieKeys.timezone);
+  const {initialState} = useInitialState(defaultInitialState);
   
   return (
     <IntlProvider locale={locale.slice(0, 2)} messages={messages[locale]}>
@@ -56,3 +56,5 @@ export function AppContextProvider({ initialState: defaultInitialState, children
 export function useAppContextState(): AppContextState {
   return useContext(AppContext);
 }
+
+export const AppContextConsumer: Consumer<AppContextState> = AppContext.Consumer;

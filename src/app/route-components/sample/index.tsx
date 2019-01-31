@@ -2,8 +2,8 @@ import { useAppContextState } from 'app/context';
 import moment from 'moment-timezone';
 import React, { useCallback, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { PortalSample } from './components/PortalSample';
 import { useIntl } from 'use-react-intl';
+import { PortalSample } from './components/PortalSample';
 
 const dateFormat: string = 'LLLL';
 

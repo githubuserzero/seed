@@ -5,7 +5,7 @@ export interface RouterContentsProps {
   routeStore: RouteStore;
 }
 
-export function RouterContents({ routeStore }: RouterContentsProps) {
+export function RouterContents({routeStore}: RouterContentsProps) {
   return (
     <Fragment>
       {routeStore.getAllRoutes()}

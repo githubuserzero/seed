@@ -1,5 +1,5 @@
 import React from 'react';
-import { Markdown, CodeBlock } from 'react-devdoc';
+import { CodeBlock, Markdown } from 'react-devdoc';
 import { Sample } from './Sample';
 
 // tslint:disable:no-default-export

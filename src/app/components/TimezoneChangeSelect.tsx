@@ -1,13 +1,13 @@
-import React, { ChangeEvent, useState } from 'react';
-import { timezoneList, timezoneMap } from 'use-timezone';
+import React, { ChangeEvent, useCallback, useState } from 'react';
+import { Timezone, timezoneList, timezoneMap } from 'use-timezone';
 import { useAppContextState } from '../context';
 import styles from './TimezoneChangeSelect.module.scss';
 
 export function TimezoneChangeSelect() {
-  const { timezone, updateTimezone } = useAppContextState();
+  const {timezone, updateTimezone} = useAppContextState();
   const [zoneName, updateZoneName] = useState<string>(timezone.zoneName);
   
-  function onChange(event: ChangeEvent<{ value: string }>) {
+  const onChange: (event: ChangeEvent<{value: string}>) => void = useCallback((event: ChangeEvent<{value: string}>) => {
     const nextZoneName: string = event.target.value;
     
     updateZoneName(nextZoneName);
@@ -15,7 +15,7 @@ export function TimezoneChangeSelect() {
     if (timezoneMap.has(nextZoneName)) {
       updateTimezone(nextZoneName);
     }
-  }
+  }, [updateTimezone]);
   
   return (
     <div>
@@ -26,7 +26,7 @@ export function TimezoneChangeSelect() {
       
       <datalist id="timezones">
         {
-          timezoneList.map(tz => (
+          timezoneList.map((tz: Timezone) => (
             <option key={tz.zoneName} value={tz.zoneName}/>
           ))
         }

@@ -9,7 +9,7 @@ export interface AppProps {
   routeStore: RouteStore;
 }
 
-export function App({ routeStore }: AppProps) {
+export function App({routeStore}: AppProps) {
   return (
     <Fragment>
       <div>
