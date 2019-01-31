@@ -33,7 +33,7 @@ export interface AppContextState {
 // @ts-ignore
 const AppContext: Context<AppContextState> = createContext<AppContextState>();
 
-export function AppContextProvider({ initialState: defaultInitialState, children, currentLocale, currentTimezone }: AppContextProps) {
+export function AppContextProvider({initialState: defaultInitialState, children, currentLocale, currentTimezone}: AppContextProps) {
   const {locale, updateLocale} = useLocale(currentLocale);
   const {timezone, updateTimezone} = useTimezone(currentTimezone, cookieKeys.timezone);
   const {initialState} = useInitialState(defaultInitialState);

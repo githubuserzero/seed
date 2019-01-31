@@ -1,8 +1,7 @@
+import 'prismjs/themes/prism-okaidia.css';
 import React from 'react';
 import { RouterContents } from './components/RouterContents';
 import { RouterNavigation } from './components/RouterNavigation';
-
-import 'prismjs/themes/prism-okaidia.css';
 
 export function Showcase() {
   return (

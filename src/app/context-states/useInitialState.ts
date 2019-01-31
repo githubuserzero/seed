@@ -9,7 +9,7 @@ export interface Result {
 
 export function useInitialState(defaultInitialState: InitialState | null): Result {
   const [initialState, setInitialState] = useState<InitialState | null>(defaultInitialState);
-  const { location } = useReactRouter();
+  const {location} = useReactRouter();
   const [lastLocation, setLastLocation] = useState<Location>(location);
   
   useEffect(() => {
@@ -19,5 +19,5 @@ export function useInitialState(defaultInitialState: InitialState | null): Resul
     }
   }, [location]);
   
-  return { initialState };
+  return {initialState};
 }
