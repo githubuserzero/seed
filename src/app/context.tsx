@@ -3,10 +3,10 @@ import React, { Consumer, Context, createContext, ReactNode, useContext } from '
 import { addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 import ko from 'react-intl/locale-data/ko';
+import { useLocale } from 'use-locale';
 import { IntlProvider } from 'use-react-intl';
 import { Timezone, useTimezone } from 'use-timezone';
 import { useInitialState } from './context-states/useInitialState';
-import { useLocale } from './context-states/useLocale';
 import { cookieKeys } from './data-types/cookie';
 import { InitialState } from './data-types/initialState';
 import { LanguageCode } from './data-types/locale';
@@ -34,7 +34,7 @@ export interface AppContextState {
 const AppContext: Context<AppContextState> = createContext<AppContextState>();
 
 export function AppContextProvider({initialState: defaultInitialState, children, currentLocale, currentTimezone}: AppContextProps) {
-  const {locale, updateLocale} = useLocale(currentLocale);
+  const {locale, updateLocale} = useLocale<LanguageCode>(currentLocale);
   const {timezone, updateTimezone} = useTimezone(currentTimezone, cookieKeys.timezone);
   const {initialState} = useInitialState(defaultInitialState);
   

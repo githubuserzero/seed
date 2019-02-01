@@ -8,5 +8,10 @@
         "*"
       ]
     }
-  }
+  },
+  "exclude": [
+    "dist",
+    "dist-dev",
+    "*.js"
+  ]
 }

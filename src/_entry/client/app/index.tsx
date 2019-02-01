@@ -1,11 +1,12 @@
 import { App } from 'app';
 import { AppContextProvider } from 'app/context';
 import { cookieKeys } from 'app/data-types/cookie';
-import { getBrowserLocale } from 'app/data-types/locale';
+import { LanguageCode } from 'app/data-types/locale';
 import { asyncRouteStore } from 'app/route/asyncRouteStore';
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { getBrowserLocale } from 'use-locale';
 import { getBrowserTimezone } from 'use-timezone';
 import '../polyfills';
 
@@ -14,7 +15,7 @@ function AppProvider() {
     <StrictMode>
       <BrowserRouter>
         <AppContextProvider initialState={window.__INITIAL_STATE__ || null}
-                            currentLocale={getBrowserLocale()}
+                            currentLocale={getBrowserLocale<LanguageCode>()}
                             currentTimezone={getBrowserTimezone(cookieKeys.timezone)}>
           <App routeStore={asyncRouteStore}/>
         </AppContextProvider>
