@@ -6,8 +6,9 @@
     <% if (locals.base) { %>
       <base href="<%- locals.base %>"/>
     <% } %>
+    <link rel="stylesheet" type="text/css" href="vendor.css"/>
     <link rel="stylesheet" type="text/css" href="style.css"/>
-    <title>Title...</title>
+    <title>Seed</title>
     <% if (locals.initialState) { %>
       <script>
         window.__INITIAL_STATE__ = <%- locals.initialState.replace(/</g, '\\u003c'); %>
