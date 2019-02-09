@@ -2,7 +2,7 @@ import { App } from 'app';
 import { AppContextProvider } from 'app/context';
 import { cookieKeys } from 'app/data-types/cookie';
 import { InitialState } from 'app/data-types/initialState';
-import { LanguageCode } from 'app/data-types/locale';
+import { LanguageCode, languageCodes } from 'app/data-types/locale';
 import { syncRouteStore } from 'app/route/syncRouteStore';
 import { render } from 'ejs';
 import { Request } from 'express';
@@ -12,7 +12,7 @@ import { StaticRouter } from 'react-router';
 import template from '../_templates/index.ejs';
 
 export function renderApp(req: Request, contentsState: Partial<InitialState>): string {
-  const locale: LanguageCode = req.cookies[cookieKeys.locale] || 'en-US';
+  const locale: LanguageCode = req.cookies[cookieKeys.locale] || req.acceptsLanguages(...languageCodes) || languageCodes[0];
   const timezone: string = req.cookies[cookieKeys.timezone] || 'Asia/Seoul';
   
   const initialState: InitialState = {

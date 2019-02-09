@@ -1,1 +1,0 @@
-{"version":3,"sources":["/Users/ssen/Workspace/seed/src/app/components/TimezoneChangeSelect.module.scss"],"names":[],"mappings":"AAAA,mCACE,oBAAqB,CAGvB,oCACE,qBAAuB","file":"style.css","sourcesContent":[".draft {\n  border: 1px solid red;\n}\n\n.commit {\n  border: 1px solid black;\n}"]}
