@@ -7,8 +7,7 @@ import { PortalSample } from './components/PortalSample';
 
 const dateFormat: string = 'LLLL';
 
-// tslint:disable:no-default-export
-export default function () {
+export default function Sample() {
   const {initialState, locale, timezone} = useAppContextState();
   
   const testString: string = useMemo<string>(() => {

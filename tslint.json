@@ -1,7 +1,3 @@
 {
-  "extends": "tslint-ssen-rules",
-  "rules": {
-    "no-default-export": true,
-    "no-reference": false
-  }
+  "extends": "tslint-ssen-rules"
 }

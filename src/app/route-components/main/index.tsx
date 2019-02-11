@@ -1,7 +1,6 @@
 import React from 'react';
 
-// tslint:disable:no-default-export
-export default function () {
+export default function Main() {
   return (
     <div>
       Main
