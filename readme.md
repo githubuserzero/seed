@@ -14,14 +14,14 @@ npm run git.publish
 # NginX config sample
 
 ```bash
-pm2 start /project/dist/ssr
+pm2 start /project/dist/server
 ```
 
-Start SSR(Server side rendering) server 
+Start Node.js server (with PM2) 
 
 ```
 server {
-  set $STATIC_FILES /project/dist/web;
+  set $STATIC_FILES /{project-root}/dist/web;
   set $SSR_PORT 4100;
 
   listen       9100;
