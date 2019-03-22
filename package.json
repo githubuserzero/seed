@@ -83,7 +83,7 @@
     "react-intl": "^2.8.0",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
-    "react-router-store": "^0.2.0",
+    "react-router-store": "^0.3.1",
     "url-search-params-polyfill": "^5.0.0",
     "use-locale": "^0.2.0",
     "use-react-intl": "^0.1.2",
