@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset=UTF-8>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="theme-color" content="#000000" />
+    <link rel="manifest" href="manifest.json" />
+    
+    <link rel="stylesheet" type="text/css" href="vendor.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    
+    <title>App</title>
+  
     <% if (locals.base) { %>
       <base href="<%- locals.base %>"/>
     <% } %>
-    <link rel="stylesheet" type="text/css" href="vendor.css"/>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-    <title>Seed</title>
+    
     <% if (locals.initialState) { %>
       <script>
         window.__INITIAL_STATE__ = <%- locals.initialState.replace(/</g, '\\u003c'); %>
@@ -17,6 +24,7 @@
   </head>
   
   <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="app"><%- (locals.body || '') %></div>
   </body>
   
