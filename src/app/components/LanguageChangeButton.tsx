@@ -1,21 +1,15 @@
 import React from 'react';
+import { LanguageCode, languageCodes } from '../config';
 import { useAppContextState } from '../context';
-import { LanguageCode, languageCodes } from '../data-types/locale';
 
 export function LanguageChangeButton() {
   const {locale, updateLocale} = useAppContextState();
   
-  return (
-    <div>
-      {locale}
-      {' : '}
-      {
-        languageCodes.map((languageCode: LanguageCode) => (
-          <button key={languageCode} onClick={() => updateLocale(languageCode)}>
-            {languageCode}
-          </button>
-        ))
-      }
-    </div>
-  );
+  return languageCodes.map((languageCode: LanguageCode) => (
+    <button key={languageCode}
+            className={languageCode === locale ? 'active' : ''}
+            onClick={() => updateLocale(languageCode)}>
+      {languageCode}
+    </button>
+  ));
 }

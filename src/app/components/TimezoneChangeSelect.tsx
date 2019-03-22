@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import { Timezone, timezoneList, timezoneMap } from 'use-timezone';
 import { useAppContextState } from '../context';
-import styles from './TimezoneChangeSelect.module.scss';
 
 export function TimezoneChangeSelect() {
   const {timezone, updateTimezone} = useAppContextState();
@@ -18,9 +17,9 @@ export function TimezoneChangeSelect() {
   }, [updateTimezone]);
   
   return (
-    <div>
+    <>
       <input list="timezones"
-             className={timezoneMap.has(zoneName) ? styles.commit : styles.draft}
+             aria-invalid={!timezoneMap.has(zoneName)}
              value={zoneName}
              onChange={onChange}/>
       
@@ -31,6 +30,6 @@ export function TimezoneChangeSelect() {
           ))
         }
       </datalist>
-    </div>
+    </>
   );
 }

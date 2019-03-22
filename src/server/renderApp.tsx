@@ -1,8 +1,7 @@
 import { App } from 'app';
+import { cookieKeys, LanguageCode, languageCodes } from 'app/config';
 import { AppContextProvider } from 'app/context';
-import { cookieKeys } from 'app/data-types/cookie';
 import { InitialState } from 'app/data-types/initialState';
-import { LanguageCode, languageCodes } from 'app/data-types/locale';
 import { syncRouteStore } from 'app/route/syncRouteStore';
 import { render } from 'ejs';
 import { Request } from 'express';

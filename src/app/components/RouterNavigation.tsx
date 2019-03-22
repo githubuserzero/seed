@@ -1,11 +1,18 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export function RouterNavigation() {
   return (
-    <Fragment>
-      <Link to="/">Home</Link>
-      <Link to="/sample">Sample</Link>
-    </Fragment>
+    <>
+      <NavLink to="/" exact>
+        HOME
+      </NavLink>
+      <NavLink to="/translation-sample">
+        TRANSLATION
+      </NavLink>
+      <NavLink to="/timezone-sample">
+        TIMEZONE
+      </NavLink>
+    </>
   );
 }

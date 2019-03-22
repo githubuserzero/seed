@@ -1,0 +1,79 @@
+$border: 0.7rem;
+$font-size: 1rem;
+$item-padding: 0.3rem 0.6rem;
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-size: 30px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@mixin item() {
+  font-size: inherit;
+  border: 0;
+  margin: 0;
+  display: inline-block;
+  padding: $item-padding;
+  text-decoration: none;
+}
+
+@mixin items($colors) {
+  @include item;
+  
+  color: rgba(255, 255, 255, 0.3);
+  
+  &.active {
+    color: rgba(255, 255, 255, 1);
+  }
+  
+  @each $color in $colors {
+    $i: index($colors, $color);
+    
+    &:nth-of-type(#{$i}) {
+      background-color: $color;
+    }
+  }
+}
+
+.header {
+  border: $border solid #999999;
+  display: flex;
+  
+  .header-space {
+    flex: 1;
+  }
+  
+  a {
+    @include items(#6d8ce3 #7a95e8 #879dec #93a6f1 #9eaff6 #aab8fa #b5c1ff);
+  }
+  
+  button {
+    @include items(#55c272 #67d68a #79eaa2 #8cffba);
+    
+    outline: none;
+  }
+  
+  input {
+    @include item;
+    
+    color: #555555;
+    
+    &[aria-invalid="true"] {
+      background-color: red;
+    }
+  }
+}
+
+.body {
+  border: $border solid #cccccc;
+  
+  table {
+    th {
+      text-align: left;
+    }
+  }
+}

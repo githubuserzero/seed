@@ -1,18 +1,11 @@
 import messages from 'generated/locales.json';
 import React, { Consumer, Context, createContext, ReactNode, useContext } from 'react';
-import { addLocaleData } from 'react-intl';
-import en from 'react-intl/locale-data/en';
-import ko from 'react-intl/locale-data/ko';
 import { useLocale } from 'use-locale';
 import { IntlProvider } from 'use-react-intl';
 import { Timezone, useTimezone } from 'use-timezone';
+import { cookieKeys, LanguageCode } from './config';
 import { useInitialState } from './context-states/useInitialState';
-import { cookieKeys } from './data-types/cookie';
 import { InitialState } from './data-types/initialState';
-import { LanguageCode } from './data-types/locale';
-
-addLocaleData(en);
-addLocaleData(ko);
 
 export interface AppContextProps {
   initialState: InitialState | null;

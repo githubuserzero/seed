@@ -1,6 +1,7 @@
 {
   "name": "seed",
-  "version": "2019.2.0",
+  "version": "2019.3.0",
+  "private": true,
   "description": "{project-description}",
   "scripts": {
     "module.build": "zeroconfig module.build",

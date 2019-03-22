@@ -1,4 +1,4 @@
-import { LanguageCode } from './locale';
+import { LanguageCode } from '../config';
 
 export interface InitialState {
   locale: LanguageCode;

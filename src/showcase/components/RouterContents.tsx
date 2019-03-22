@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 
 export function RouterContents() {
   return (
-    <Fragment>
-      <Route exact path="/showcase" component={require('showcase/router-components/main').default}/>
-      <Route path="/showcase/sample" component={require('showcase/router-components/sample').default}/>
-    </Fragment>
+    <>
+      <Route exact path="/showcase" component={require('showcase/pages/main').default}/>
+      <Route path="/showcase/sample" component={require('showcase/pages/sample').default}/>
+    </>
   );
 }

@@ -4,10 +4,14 @@ export const syncRouteStore: RouteStore = new SyncRouteStore([
   {
     path: '/',
     exact: true,
-    component: require('../route-components/main').default,
+    component: require('../pages/main').default,
   },
   {
-    path: '/sample',
-    component: require('../route-components/sample').default,
+    path: '/translation-sample',
+    component: require('../pages/translation-sample').default,
+  },
+  {
+    path: '/timezone-sample',
+    component: require('../pages/timezone-sample').default,
   },
 ]);

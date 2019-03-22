@@ -1,7 +1,6 @@
 import { App } from 'app';
+import { cookieKeys, LanguageCode, languageCodes } from 'app/config';
 import { AppContextProvider } from 'app/context';
-import { cookieKeys } from 'app/data-types/cookie';
-import { LanguageCode, languageCodes } from 'app/data-types/locale';
 import { asyncRouteStore } from 'app/route/asyncRouteStore';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -11,14 +10,18 @@ import { getBrowserLocale } from 'use-locale';
 import { getBrowserTimezone } from 'use-timezone';
 
 function AppProvider() {
+  const currentLocale: LanguageCode = getBrowserLocale<LanguageCode>({
+    cookieKey: cookieKeys.locale,
+    fallbackLanguageCodes: languageCodes,
+  });
+  
+  const currentTimezone: string = getBrowserTimezone(cookieKeys.timezone);
+  
   return (
     <BrowserRouter>
       <AppContextProvider initialState={window.__INITIAL_STATE__ || null}
-                          currentLocale={getBrowserLocale<LanguageCode>({
-                            cookieKey: cookieKeys.locale,
-                            fallbackLanguageCodes: languageCodes,
-                          })}
-                          currentTimezone={getBrowserTimezone(cookieKeys.timezone)}>
+                          currentLocale={currentLocale}
+                          currentTimezone={currentTimezone}>
         <App routeStore={asyncRouteStore}/>
       </AppContextProvider>
     </BrowserRouter>
