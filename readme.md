@@ -1,3 +1,7 @@
+# Project seed
+
+[![DeepScan grade](https://deepscan.io/api/teams/3270/projects/4810/branches/38446/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=3270&pid=4810&bid=38446)
+
 # Start development
 
 ```bash
