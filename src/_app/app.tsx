@@ -29,11 +29,12 @@ function AppProvider() {
 }
 
 if (window.__INITIAL_STATE__) {
-  asyncRouteStore.preload(location.pathname).then(() => {
+  (async () => {
+    await asyncRouteStore.preload(location.pathname);
     ReactDOM.hydrate((
       <AppProvider/>
     ), document.querySelector('#app'));
-  });
+  })();
 } else {
   ReactDOM.render((
     <AppProvider/>
