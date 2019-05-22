@@ -1,134 +1,108 @@
 {
   "name": "seed",
-  "version": "2019.3.0",
+  "version": "2019.4.0",
   "private": true,
-  "description": "{project-description}",
   "scripts": {
-    "module.build": "zeroconfig module.build",
-    "module.publish": "zeroconfig module.publish",
-    "web.build": "zeroconfig web.build",
-    "web.dev.build": "zeroconfig web.dev.build",
-    "web.dev.build.watch": "zeroconfig web.dev.build.watch",
-    "web.dev.start": "zeroconfig web.dev.start",
-    "web.server.build": "zeroconfig web.server.build",
-    "web.server.dev.build": "zeroconfig web.server.dev.build",
-    "web.server.dev.build.watch": "zeroconfig web.server.dev.build.watch",
-    "web.server.dev.start": "zeroconfig web.server.dev.start",
-    "translation.build": "zeroconfig intl.build",
-    "translation.build.watch": "zeroconfig intl.build.watch",
-    "translation.distribute": "zeroconfig intl.distribute",
-    "template.build": "zeroconfig template.build",
-    "generate": "npm run translation.build && npm run template.build",
-    "build": "npm run generate && npm run web.build && npm run web.server.build && npm run module.build",
-    "start": "npm run generate && multiplerun development",
-    "start-translation": "npm run generate && multiplerun translation",
-    "test": "jest",
-    "lint": "tslint \"src/**/!(*.spec|*.test).ts?(x)\"",
-    "git.publish.web": "git subtree push --prefix dist/web origin dist/web",
-    "git.publish.server": "git subtree push --prefix dist/server origin dist/server",
-    "git.publish": "npm run git.publish.web && npm run git.publish.server",
-    "surge.publish": "surge dist/web"
+    "app:build": "zeroconfig-webapp-scripts build app --size-report false",
+    "app:dev:build": "npm run app:build --- --mode development",
+    "app:start": "zeroconfig-webapp-scripts start app",
+    "package:build": "zeroconfig-package-scripts build",
+    "package:publish": "zeroconfig-package-scripts publish",
+    "storybook:start": "start-storybook",
+    "storybook:build": "build-storybook",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "build": "npm run app:build",
+    "start": "npm run app:start",
+    "test": "jest --colors",
+    "test:e2e:build": "sh e2e/build.sh",
+    "coverage": "jest --colors --coverage && open coverage/index.html",
+    "lint": "tslint \"src/**/*.{ts,tsx}\"",
+    "git:publish:browser": "git subtree push --prefix dist/browser origin dist/app/browser",
+    "git:publish:server": "git subtree push --prefix dist/server origin dist/app/server",
+    "git:publish": "npm run git:publish:web && npm run git:publish:server"
   },
-  "multiplerun": {
-    "development": [
-      [
-        "npm run web.server.dev.build.watch",
-        "npm run web.server.dev.start"
-      ],
-      "npm run web.dev.start"
-    ],
-    "translation": [
-      [
-        "npm run web.server.dev.build.watch",
-        "npm run web.server.dev.start"
-      ],
-      [
-        "npm run web.dev.start",
-        "npm run translation.build.watch"
-      ]
-    ]
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iamssen/seed.git"
-  },
-  "upstream": {
-    "git": "https://github.com/iamssen/seed.git"
-  },
-  "bugs": {
-    "url": "https://github.com/iamssen/seed/issues"
-  },
-  "homepage": "https://github.com/iamssen/seed",
   "pre-commit": [
     "test",
     "lint"
   ],
   "jest": {
-    "preset": "react-zeroconfig/configs"
+    "preset": "react-zeroconfig",
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ],
+    "coverageReporters": [
+      "html"
+    ]
   },
   "dependencies": {
-    "@types/prismjs": "^1.16.0",
-    "body-parser": "^1.18.3",
-    "cookie-parser": "^1.4.4",
+    "@loadable/component": "^5.10.1",
+    "@loadable/server": "^5.9.0",
     "d3-array": "^2.0.2",
     "ejs": "^2.6.1",
-    "express": "^4.16.4",
     "history": "^4.9.0",
-    "immer": "^2.1.5",
+    "immer": "^3.1.2",
     "js-cookie": "^2.2.0",
+    "koa": "^2.7.0",
+    "koa-router": "^7.4.0",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.23",
-    "node-fetch": "^2.3.0",
+    "moment-timezone": "^0.5.25",
+    "node-fetch": "^2.6.0",
     "numeral": "^2.0.6",
-    "prismjs": "^1.16.0",
+    "prismjs": "^1.15.0",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-app-polyfill": "^0.2.2",
+    "react": "^16.8.4",
+    "react-app-polyfill": "^1.0.1",
     "react-devdoc": "^0.1.4",
-    "react-dom": "^16.8.6",
-    "react-intl": "^2.8.0",
+    "react-dom": "^16.8.4",
+    "react-intl": "^3.0.0-beta-2",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "react-router-store": "^0.3.1",
     "regenerator-runtime": "^0.13.2",
-    "url-search-params-polyfill": "^5.1.0",
+    "url-search-params-polyfill": "^6.0.0",
     "use-locale": "^0.2.0",
     "use-react-intl": "^0.1.2",
-    "use-react-router": "^1.0.5",
+    "use-react-router": "^1.0.6",
     "use-timezone": "^0.1.3"
   },
   "devDependencies": {
-    "@types/body-parser": "^1.17.0",
+    "@storybook/react": "^5.0.11",
     "@types/compression": "0.0.36",
-    "@types/cookie-parser": "^1.4.1",
     "@types/core-js": "^2.5.0",
     "@types/d3-array": "^2.0.0",
     "@types/ejs": "^2.6.3",
-    "@types/express": "^4.16.1",
     "@types/history": "^4.7.2",
-    "@types/jest": "^24.0.11",
-    "@types/js-cookie": "^2.2.2",
+    "@types/jest": "^24.0.13",
+    "@types/js-cookie": "^2.2.1",
+    "@types/koa": "^2.0.48",
+    "@types/koa-router": "^7.0.40",
+    "@types/loadable__component": "^5.9.0",
+    "@types/loadable__server": "^5.9.0",
     "@types/loader-utils": "^1.1.3",
     "@types/mkdirp": "^0.5.2",
     "@types/moment-timezone": "^0.5.12",
-    "@types/node-fetch": "^2.3.2",
+    "@types/node-fetch": "^2.3.4",
     "@types/numeral": "0.0.25",
-    "@types/prop-types": "^15.7.0",
-    "@types/react": "^16.8.13",
+    "@types/prismjs": "^1.9.1",
+    "@types/prop-types": "^15.7.1",
+    "@types/react": "^16.8.17",
     "@types/react-dom": "^16.8.4",
     "@types/react-intl": "^2.3.17",
-    "@types/react-router": "^4.4.5",
-    "@types/react-router-dom": "^4.3.2",
+    "@types/react-loadable": "^5.5.1",
+    "@types/react-router": "^5.0.0",
+    "@types/react-router-dom": "^4.3.3",
+    "@types/storybook__react": "^4.0.1",
     "@types/webpack-env": "^1.13.9",
-    "jest": "^24.7.1",
+    "cypress": "^3.2.0",
+    "jest": "^24.8.0",
     "mkdirp": "^0.5.1",
-    "multiplerun": "^0.2.1",
+    "multiplerun": "^0.2.2",
     "pre-commit": "^1.2.2",
-    "react-zeroconfig": "^2.1.0",
-    "surge": "^0.20.3",
-    "tslint": "^5.15.0",
-    "tslint-ssen-rules": "^1.1.0",
-    "typescript": "^3.4.3"
+    "react-zeroconfig": "^3.0.0-alpha.15",
+    "surge": "^0.20.5",
+    "tslint": "^5.16.0",
+    "tslint-ssen-rules": "^1.3.0",
+    "typescript": "^3.4.5"
   }
 }

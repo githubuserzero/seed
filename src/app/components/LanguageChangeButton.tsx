@@ -1,6 +1,6 @@
 import React from 'react';
-import { LanguageCode, languageCodes } from '../config';
 import { useAppContextState } from '../context';
+import { LanguageCode, languageCodes } from '../context/config';
 
 export function LanguageChangeButton() {
   const {locale, updateLocale} = useAppContextState();

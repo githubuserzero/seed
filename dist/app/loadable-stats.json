@@ -1,0 +1,199 @@
+{
+  "errors": [],
+  "warnings": [],
+  "version": "4.28.4",
+  "hash": "99b5c2169c7b7b3c3e15",
+  "publicPath": "",
+  "outputPath": "/Users/ssen/Workspace/seed/dist/app/browser",
+  "assetsByChunkName": {
+    "app": "app.99b5c2169c7b7b3c3e15.js",
+    "pages-Home": "pages-Home.99b5c2169c7b7b3c3e15.js",
+    "pages-TimezoneSample": "pages-TimezoneSample.99b5c2169c7b7b3c3e15.js",
+    "pages-TranslationSample": "pages-TranslationSample.99b5c2169c7b7b3c3e15.js",
+    "style.js": [
+      "style.js.99b5c2169c7b7b3c3e15.css",
+      "style.js.99b5c2169c7b7b3c3e15.js"
+    ],
+    "vendor": "vendor.99b5c2169c7b7b3c3e15.js"
+  },
+  "assets": [
+    {
+      "name": "app.99b5c2169c7b7b3c3e15.js",
+      "size": 11447,
+      "chunks": [
+        0
+      ],
+      "chunkNames": [
+        "app"
+      ]
+    },
+    {
+      "name": "pages-Home.99b5c2169c7b7b3c3e15.js",
+      "size": 392,
+      "chunks": [
+        1
+      ],
+      "chunkNames": [
+        "pages-Home"
+      ]
+    },
+    {
+      "name": "pages-TimezoneSample.99b5c2169c7b7b3c3e15.js",
+      "size": 848,
+      "chunks": [
+        2
+      ],
+      "chunkNames": [
+        "pages-TimezoneSample"
+      ]
+    },
+    {
+      "name": "pages-TranslationSample.99b5c2169c7b7b3c3e15.js",
+      "size": 356,
+      "chunks": [
+        3
+      ],
+      "chunkNames": [
+        "pages-TranslationSample"
+      ]
+    },
+    {
+      "name": "style.js.99b5c2169c7b7b3c3e15.css",
+      "size": 1357,
+      "chunks": [
+        4
+      ],
+      "chunkNames": [
+        "style.js"
+      ]
+    },
+    {
+      "name": "style.js.99b5c2169c7b7b3c3e15.css.map",
+      "size": 2028,
+      "chunks": [],
+      "chunkNames": []
+    },
+    {
+      "name": "style.js.99b5c2169c7b7b3c3e15.js",
+      "size": 89,
+      "chunks": [
+        4
+      ],
+      "chunkNames": [
+        "style.js"
+      ]
+    },
+    {
+      "name": "vendor.99b5c2169c7b7b3c3e15.js",
+      "size": 1625457,
+      "chunks": [
+        5
+      ],
+      "chunkNames": [
+        "vendor"
+      ]
+    }
+  ],
+  "filteredAssets": 0,
+  "entrypoints": {
+    "app": {
+      "chunks": [
+        5,
+        4,
+        0
+      ],
+      "assets": [
+        "vendor.99b5c2169c7b7b3c3e15.js",
+        "style.js.99b5c2169c7b7b3c3e15.css",
+        "style.js.99b5c2169c7b7b3c3e15.js",
+        "app.99b5c2169c7b7b3c3e15.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "namedChunkGroups": {
+    "app": {
+      "chunks": [
+        5,
+        4,
+        0
+      ],
+      "assets": [
+        "vendor.99b5c2169c7b7b3c3e15.js",
+        "style.js.99b5c2169c7b7b3c3e15.css",
+        "style.js.99b5c2169c7b7b3c3e15.js",
+        "app.99b5c2169c7b7b3c3e15.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "pages-Home": {
+      "chunks": [
+        1
+      ],
+      "assets": [
+        "pages-Home.99b5c2169c7b7b3c3e15.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "pages-TranslationSample": {
+      "chunks": [
+        3
+      ],
+      "assets": [
+        "pages-TranslationSample.99b5c2169c7b7b3c3e15.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    },
+    "pages-TimezoneSample": {
+      "chunks": [
+        2
+      ],
+      "assets": [
+        "pages-TimezoneSample.99b5c2169c7b7b3c3e15.js"
+      ],
+      "children": {},
+      "childAssets": {}
+    }
+  },
+  "children": [
+    {
+      "errors": [],
+      "warnings": [],
+      "publicPath": "",
+      "outputPath": "/Users/ssen/Workspace/seed/dist/app/browser",
+      "assetsByChunkName": {},
+      "assets": [],
+      "filteredAssets": 0,
+      "entrypoints": {
+        "mini-css-extract-plugin": {
+          "chunks": [
+            0
+          ],
+          "assets": [
+            "*"
+          ],
+          "children": {},
+          "childAssets": {}
+        }
+      },
+      "namedChunkGroups": {
+        "mini-css-extract-plugin": {
+          "chunks": [
+            0
+          ],
+          "assets": [
+            "*"
+          ],
+          "children": {},
+          "childAssets": {}
+        }
+      },
+      "children": [],
+      "name": "mini-css-extract-plugin node_modules/css-loader/dist/cjs.js??ref--5-oneOf-7-1!node_modules/postcss-loader/src/index.js??postcss!node_modules/sass-loader/lib/loader.js??ref--5-oneOf-7-3!src/app/app.scss"
+    }
+  ]
+}

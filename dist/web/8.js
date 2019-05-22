@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{264:function(e,n,t){"use strict";t.r(n),t.d(n,"default",function(){return r});var a=t(8),c=t(0),l=t.n(c),o=t(184);function r(){var e=Object(a.b)().locale,n=Object(o.useIntl)().formatMessage;return l.a.createElement("div",null,n({id:"sample.text"},{locale:e}))}}}]);

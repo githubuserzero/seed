@@ -1,27 +1,49 @@
+import { loadableReady } from '@loadable/component';
 import React from 'react';
-import { RouteStore } from 'react-router-store';
-import { LanguageChangeButton } from './components/LanguageChangeButton';
-import { RouterContents } from './components/RouterContents';
-import { RouterNavigation } from './components/RouterNavigation';
-import { TimezoneChangeSelect } from './components/TimezoneChangeSelect';
-import './style.scss';
+import { hydrate, render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { getBrowserLocale } from 'use-locale';
+import { getBrowserTimezone } from 'use-timezone';
+import { App } from './app';
+import { AppContextProvider } from './context';
+import { cookieKeys, LanguageCode, languageCodes } from './context/config';
 
-export interface AppProps {
-  routeStore: RouteStore;
+require('react-app-polyfill/ie11');
+require('regenerator-runtime');
+require('url-search-params-polyfill');
+
+function AppProvider() {
+  const currentLocale: LanguageCode = getBrowserLocale<LanguageCode>({
+    cookieKey: cookieKeys.locale,
+    fallbackLanguageCodes: Array.from(languageCodes),
+  });
+  
+  const currentTimezone: string = getBrowserTimezone(cookieKeys.timezone);
+  
+  return (
+    <BrowserRouter>
+      <AppContextProvider initialState={window.__INITIAL_STATE__ || null}
+                          currentLocale={currentLocale}
+                          currentTimezone={currentTimezone}>
+        <App/>
+      </AppContextProvider>
+    </BrowserRouter>
+  );
 }
 
-export function App({routeStore}: AppProps) {
-  return (
-    <>
-      <div className="header">
-        <RouterNavigation/>
-        <div className="header-space"/>
-        <LanguageChangeButton/>
-        <TimezoneChangeSelect/>
-      </div>
-      <div className="body">
-        <RouterContents routeStore={routeStore}/>
-      </div>
-    </>
-  );
+if (window.__INITIAL_STATE__) {
+  loadableReady().then(() => {
+    hydrate((
+      <AppProvider/>
+    ), document.querySelector('#app'));
+  });
+} else {
+  render((
+    <AppProvider/>
+  ), document.querySelector('#app'));
+}
+
+if (module.hot) {
+  Error.stackTraceLimit = Infinity;
+  module.hot.accept();
 }

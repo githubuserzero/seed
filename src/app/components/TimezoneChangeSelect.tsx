@@ -19,14 +19,19 @@ export function TimezoneChangeSelect() {
   return (
     <>
       <input list="timezones"
+             aria-owns="timezones"
              aria-invalid={!timezoneMap.has(zoneName)}
              value={zoneName}
              onChange={onChange}/>
       
-      <datalist id="timezones">
+      <datalist id="timezones"
+                role="listbox"
+                aria-multiselectable={false}>
         {
           timezoneList.map((tz: Timezone) => (
-            <option key={tz.zoneName} value={tz.zoneName}/>
+            <option key={tz.zoneName}
+                    value={tz.zoneName}
+                    aria-selected={tz.zoneName === zoneName}/>
           ))
         }
       </datalist>

@@ -1,7 +1,3 @@
-# Project seed
-
-[![DeepScan grade](https://deepscan.io/api/teams/3270/projects/4810/branches/38446/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=3270&pid=4810&bid=38446)
-
 # Start development
 
 ```bash
@@ -12,21 +8,21 @@ npm start
 
 ```bash
 npm run build
-npm run git.publish
+npm run git:publish
 ```
 
 # NginX config sample
 
 ```bash
-pm2 start /project/dist/server
+pm2 start /project/dist/app/server
 ```
 
 Start Node.js server (with PM2) 
 
 ```
 server {
-  set $STATIC_FILES /{project-root}/dist/web;
-  set $SSR_PORT 4100;
+  set $STATIC_FILES /{project-root}/dist/app/browser;
+  set $SERVER_PORT 4100;
 
   listen       9100;
   server_name  localhost;
@@ -41,7 +37,7 @@ server {
     proxy_set_header Connection "";
     proxy_http_version 1.1;
 
-    proxy_pass http://127.0.0.1:$SSR_PORT;
+    proxy_pass http://127.0.0.1:$SERVER_PORT;
   }
 
   # Static files

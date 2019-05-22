@@ -3,14 +3,14 @@
     "baseUrl": "src",
     "paths": {
       "*": [
-        "_modules/*",
+        "_packages/*",
         "*"
       ]
     }
   },
   "exclude": [
+    ".dev",
     "dist",
-    "dist-dev",
     "node_modules"
   ]
 }

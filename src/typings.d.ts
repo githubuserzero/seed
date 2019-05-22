@@ -1,6 +1,6 @@
-/// <reference types="react-zeroconfig/configs/typings"/>
+/// <reference types="react-zeroconfig"/>
 
-// tslint:disable:no-any
 interface Window {
+  //tslint:disable-next-line:no-any
   __INITIAL_STATE__: any;
 }
