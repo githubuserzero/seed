@@ -1,7 +1,3 @@
-import { addLocaleData } from 'react-intl';
-import en from 'react-intl/locale-data/en';
-import ko from 'react-intl/locale-data/ko';
-
 // Set cookie key names
 export enum cookieKeys {
   locale = 'locale',
@@ -12,6 +8,3 @@ export enum cookieKeys {
 //tslint:disable-next-line:typedef
 export const languageCodes = ['en-US', 'ko-KR'] as const;
 export type LanguageCode = typeof languageCodes[number];
-
-addLocaleData(en);
-addLocaleData(ko);

@@ -55,7 +55,7 @@
     "react-app-polyfill": "^1.0.1",
     "react-devdoc": "^0.1.4",
     "react-dom": "^16.8.4",
-    "react-intl": "^3.0.0-beta-2",
+    "react-intl": "^3.0.0-beta-7",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-router-store": "^0.3.1",
