@@ -10,7 +10,7 @@ import { AppContextProvider } from './context';
 import { cookieKeys, LanguageCode, languageCodes } from './context/config';
 import { InitialState } from './data/initialState';
 
-const port: number = Number(process.env.PORT || process.env.SERVER_PORT || 4100);
+const port: number = Number(process.env.SERVER_PORT || 4100);
 
 const app: Koa = new Koa();
 const router: Router = new Router();
