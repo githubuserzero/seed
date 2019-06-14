@@ -9,6 +9,7 @@ import { App } from './app';
 import { AppContextProvider } from './context';
 import { cookieKeys, LanguageCode, languageCodes } from './context/config';
 import { InitialState } from './data/initialState';
+import stats from '@loadable/stats.json';
 
 const port: number = Number(process.env.SERVER_PORT || 4100);
 
@@ -53,7 +54,6 @@ export async function render(ctx: RouterContext, contentsState: Partial<InitialS
     ...contentsState,
   };
   
-  const stats: object = require('loadable-stats.json');
   const extractor: ChunkExtractor = new ChunkExtractor({stats, entrypoints: 'app'});
   
   const body: string = renderToString((

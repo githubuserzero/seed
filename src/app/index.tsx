@@ -1,6 +1,6 @@
 import { loadableReady } from '@loadable/component';
 import React from 'react';
-import { hydrate, render } from 'react-dom';
+import { hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { getBrowserLocale } from 'use-locale';
 import { getBrowserTimezone } from 'use-timezone';
@@ -22,7 +22,7 @@ function AppProvider() {
   
   return (
     <BrowserRouter>
-      <AppContextProvider initialState={window.__INITIAL_STATE__ || null}
+      <AppContextProvider initialState={window.__INITIAL_STATE__}
                           currentLocale={currentLocale}
                           currentTimezone={currentTimezone}>
         <App/>
@@ -31,17 +31,11 @@ function AppProvider() {
   );
 }
 
-if (window.__INITIAL_STATE__) {
-  loadableReady().then(() => {
-    hydrate((
-      <AppProvider/>
-    ), document.querySelector('#app'));
-  });
-} else {
-  render((
+loadableReady().then(() => {
+  hydrate((
     <AppProvider/>
   ), document.querySelector('#app'));
-}
+});
 
 if (module.hot) {
   Error.stackTraceLimit = Infinity;
