@@ -1,1 +1,0 @@
-(window.__LOADABLE_LOADED_CHUNKS__=window.__LOADABLE_LOADED_CHUNKS__||[]).push([[3],{239:function(e,t,n){"use strict";n.r(t),n.d(t,"default",function(){return c});var _=n(25),a=n(1),r=n.n(a),u=n(37);function c(){var e=Object(_.b)().locale,t=Object(a.useContext)(u.a).formatMessage;return r.a.createElement("div",null,t({id:"sample.text"},{locale:e}))}}}]);

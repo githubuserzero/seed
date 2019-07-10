@@ -1,97 +1,105 @@
 {
   "errors": [],
   "warnings": [],
-  "version": "4.28.4",
-  "hash": "99b5c2169c7b7b3c3e15",
+  "version": "4.35.3",
+  "hash": "d4162b974b84f021b583",
   "publicPath": "",
   "outputPath": "/Users/ssen/Workspace/seed/dist/app/browser",
   "assetsByChunkName": {
-    "app": "app.99b5c2169c7b7b3c3e15.js",
-    "pages-Home": "pages-Home.99b5c2169c7b7b3c3e15.js",
-    "pages-TimezoneSample": "pages-TimezoneSample.99b5c2169c7b7b3c3e15.js",
-    "pages-TranslationSample": "pages-TranslationSample.99b5c2169c7b7b3c3e15.js",
+    "app": "app.d4162b974b84f021b583.js",
+    "pages-Home": "pages-Home.d4162b974b84f021b583.js",
+    "pages-TimezoneSample": "pages-TimezoneSample.d4162b974b84f021b583.js",
+    "pages-TranslationSample": "pages-TranslationSample.d4162b974b84f021b583.js",
     "style.js": [
-      "style.js.99b5c2169c7b7b3c3e15.css",
-      "style.js.99b5c2169c7b7b3c3e15.js"
+      "style.js.d4162b974b84f021b583.css",
+      "style.js.d4162b974b84f021b583.js"
     ],
-    "vendor": "vendor.99b5c2169c7b7b3c3e15.js"
+    "vendor": "vendor.d4162b974b84f021b583.js"
   },
   "assets": [
     {
-      "name": "app.99b5c2169c7b7b3c3e15.js",
-      "size": 11447,
+      "name": "app.d4162b974b84f021b583.js",
+      "size": 11244,
       "chunks": [
         0
       ],
       "chunkNames": [
         "app"
-      ]
+      ],
+      "emitted": false
     },
     {
-      "name": "pages-Home.99b5c2169c7b7b3c3e15.js",
+      "name": "pages-Home.d4162b974b84f021b583.js",
       "size": 392,
       "chunks": [
         1
       ],
       "chunkNames": [
         "pages-Home"
-      ]
+      ],
+      "emitted": false
     },
     {
-      "name": "pages-TimezoneSample.99b5c2169c7b7b3c3e15.js",
+      "name": "pages-TimezoneSample.d4162b974b84f021b583.js",
       "size": 848,
       "chunks": [
         2
       ],
       "chunkNames": [
         "pages-TimezoneSample"
-      ]
+      ],
+      "emitted": false
     },
     {
-      "name": "pages-TranslationSample.99b5c2169c7b7b3c3e15.js",
-      "size": 356,
+      "name": "pages-TranslationSample.d4162b974b84f021b583.js",
+      "size": 357,
       "chunks": [
         3
       ],
       "chunkNames": [
         "pages-TranslationSample"
-      ]
+      ],
+      "emitted": false
     },
     {
-      "name": "style.js.99b5c2169c7b7b3c3e15.css",
+      "name": "style.js.d4162b974b84f021b583.css",
       "size": 1357,
       "chunks": [
         4
       ],
       "chunkNames": [
         "style.js"
-      ]
+      ],
+      "emitted": false
     },
     {
-      "name": "style.js.99b5c2169c7b7b3c3e15.css.map",
+      "name": "style.js.d4162b974b84f021b583.css.map",
       "size": 2028,
       "chunks": [],
-      "chunkNames": []
+      "chunkNames": [],
+      "emitted": false
     },
     {
-      "name": "style.js.99b5c2169c7b7b3c3e15.js",
+      "name": "style.js.d4162b974b84f021b583.js",
       "size": 89,
       "chunks": [
         4
       ],
       "chunkNames": [
         "style.js"
-      ]
+      ],
+      "emitted": false
     },
     {
-      "name": "vendor.99b5c2169c7b7b3c3e15.js",
-      "size": 1625457,
+      "name": "vendor.d4162b974b84f021b583.js",
+      "size": 835953,
       "chunks": [
         5
       ],
       "chunkNames": [
         "vendor"
-      ]
+      ],
+      "emitted": false
     }
   ],
   "filteredAssets": 0,
@@ -103,10 +111,10 @@
         0
       ],
       "assets": [
-        "vendor.99b5c2169c7b7b3c3e15.js",
-        "style.js.99b5c2169c7b7b3c3e15.css",
-        "style.js.99b5c2169c7b7b3c3e15.js",
-        "app.99b5c2169c7b7b3c3e15.js"
+        "vendor.d4162b974b84f021b583.js",
+        "style.js.d4162b974b84f021b583.css",
+        "style.js.d4162b974b84f021b583.js",
+        "app.d4162b974b84f021b583.js"
       ],
       "children": {},
       "childAssets": {}
@@ -120,10 +128,10 @@
         0
       ],
       "assets": [
-        "vendor.99b5c2169c7b7b3c3e15.js",
-        "style.js.99b5c2169c7b7b3c3e15.css",
-        "style.js.99b5c2169c7b7b3c3e15.js",
-        "app.99b5c2169c7b7b3c3e15.js"
+        "vendor.d4162b974b84f021b583.js",
+        "style.js.d4162b974b84f021b583.css",
+        "style.js.d4162b974b84f021b583.js",
+        "app.d4162b974b84f021b583.js"
       ],
       "children": {},
       "childAssets": {}
@@ -133,7 +141,7 @@
         1
       ],
       "assets": [
-        "pages-Home.99b5c2169c7b7b3c3e15.js"
+        "pages-Home.d4162b974b84f021b583.js"
       ],
       "children": {},
       "childAssets": {}
@@ -143,7 +151,7 @@
         3
       ],
       "assets": [
-        "pages-TranslationSample.99b5c2169c7b7b3c3e15.js"
+        "pages-TranslationSample.d4162b974b84f021b583.js"
       ],
       "children": {},
       "childAssets": {}
@@ -153,7 +161,7 @@
         2
       ],
       "assets": [
-        "pages-TimezoneSample.99b5c2169c7b7b3c3e15.js"
+        "pages-TimezoneSample.d4162b974b84f021b583.js"
       ],
       "children": {},
       "childAssets": {}
@@ -193,7 +201,7 @@
         }
       },
       "children": [],
-      "name": "mini-css-extract-plugin node_modules/css-loader/dist/cjs.js??ref--5-oneOf-7-1!node_modules/postcss-loader/src/index.js??postcss!node_modules/sass-loader/lib/loader.js??ref--5-oneOf-7-3!src/app/app.scss"
+      "name": "mini-css-extract-plugin node_modules/react-zeroconfig/node_modules/css-loader/dist/cjs.js??ref--5-oneOf-7-1!node_modules/postcss-loader/src/index.js??postcss!node_modules/sass-loader/lib/loader.js??ref--5-oneOf-7-3!src/app/app.scss"
     }
   ]
 }
